@@ -3,7 +3,7 @@ import psycopg2
 #cur.execute(sql)
 #con.commit()
 
-con = psycopg2.connect(host='localhost', database='LojaBD', user='postgres', password='29272212')
+con = psycopg2.connect(host='localhost', database='LojaBD', user='postgres', password='postgres123')
 cur = con.cursor()
 sql = 'create table teste (id serial primary key, nome varchar(100), sobrenome varchar(2))'
 cur.execute(sql)
