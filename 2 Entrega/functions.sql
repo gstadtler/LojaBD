@@ -1,10 +1,9 @@
--- Verifica se o vendedor cumpriu a meta mensal parametrizada em seu perfil
-CREATE OR REPLACE FUNCTION verifica_meta_vendedor (cpf_vendedor IN NUMBER, data_meta IN NUMBER)
-    RETURN VARCHAR
-IS
-    meta_atingida VARCHAR(20);
-    meta_vendedor NUMBER;
-    valor_vendas NUMBER;
+CREATE OR REPLACE FUNCTION verifica_meta_vendedor (IN cpf_vendedor BIGINT, IN mes INTEGER, IN ano INTEGER)
+    RETURNS VARCHAR AS $$
+DECLARE
+    resultado_meta VARCHAR(20);
+    meta_vendedor INTEGER;
+    valor_vendas INTEGER;
 BEGIN
     SELECT meta INTO meta_vendedor
     FROM vendedor
@@ -13,11 +12,17 @@ BEGIN
     SELECT SUM(valor_total) INTO valor_vendas
     FROM venda
     WHERE venda.cpf_funcionario_venda = cpf_vendedor
-    AND TO_CHAR(venda.data_venda,'MM/YY') = data_meta;
+    AND CAST((extract(month from venda.data_venda)) AS INTEGER) = mes
+	AND CAST((extract(year from venda.data_venda)) AS INTEGER) = ano;
     
     IF valor_vendas >= meta_vendedor THEN
-        meta_atingida := 'Meta atingida';
+        resultado_meta := 'Meta atingida';
     ELSE
-        meta_atingida := 'Meta n�o atingida';
+        resultado_meta := 'Meta não atingida';
     END IF;
+	RETURN resultado_meta;
 END;
+$$ LANGUAGE plpgsql;
+
+-- TESTANDO A FUNÇÃO
+SELECT verifica_meta_vendedor(12304136792,7,2019)

@@ -73,7 +73,7 @@ CREATE TABLE telefone_fornecedor (
 );
 
 CREATE TABLE produto (
-    id_produto     INTEGER,
+    id_produto     SERIAL,
     nome           VARCHAR(20),
     preco_venda    INTEGER,
     preco_compra   INTEGER,
@@ -82,7 +82,7 @@ CREATE TABLE produto (
 );
 
 CREATE TABLE compra_entrada (
-    id_entrada        INTEGER,
+    id_entrada        SERIAL,
     cnpj_fornecedor   BIGINT,
     data_compra       DATE,
     valor_total       INTEGER,
@@ -91,8 +91,8 @@ CREATE TABLE compra_entrada (
 );
 
 CREATE TABLE compra_produto (
-    id_produto_produto   INTEGER,
-    id_entrada_compra      INTEGER,
+    id_produto_produto   SERIAL,
+    id_entrada_compra      SERIAL,
     quantidade           INTEGER,
     PRIMARY KEY ( id_produto_produto, id_entrada_compra ),
     FOREIGN KEY ( id_produto_produto ) REFERENCES produto ( id_produto ),
@@ -118,7 +118,7 @@ CREATE TABLE telefone_cliente (
 );
 
 CREATE TABLE venda (
-    id_saida                INTEGER,
+    id_saida                SERIAL,
     cpf_funcionario_venda   BIGINT,
     cpf_cliente_venda       BIGINT,
     data_venda              DATE,
@@ -129,8 +129,8 @@ CREATE TABLE venda (
 );
 
 CREATE TABLE venda_produto (
-    id_produto_produto   INTEGER,
-    id_saida_venda       INTEGER,
+    id_produto_produto   SERIAL,
+    id_saida_venda       SERIAL,
     quantidade           INTEGER,
     PRIMARY KEY ( id_produto_produto, id_saida_venda ),
     FOREIGN KEY ( id_produto_produto ) REFERENCES produto ( id_produto ),
