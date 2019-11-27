@@ -15,15 +15,18 @@ class Connection():
         for row in self.result:
             print(row)
             
+    def callProCedure(self,procNome,procValores):
+        self.cur.callproc(procNome, procValores)     
+              
     def close(self):
         self.cur.close()
         self.conn.close()
 
-
-db = Connection()
-db.query('Select * from cliente')
-db.queryResult()
-db.close()
+# Test
+#db = Connection()
+#db.query('Select * from cliente')
+#db.queryResult()
+#db.close()
 
 # con.commit()
 
