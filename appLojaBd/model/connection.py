@@ -16,7 +16,7 @@ class Connection():
 
 
 db = Connection()
-db.query("SELECT * FROM table;")
+db.query("Select * from cliente")
 db.close()
 
 # con.commit()
