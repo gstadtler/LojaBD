@@ -25,14 +25,7 @@ def validaCnpj(cnpj):
         print("CNPJ em branco!")
     elif len(cnpj) > 14:
         print("CNPJ possui mais de 14 digitos")
-
-def validaPreco(venda, compra):
-    if venda < compra:
-        print("O preço de venda não deve ser menor que o preço de compra do produto")
-
-def validaQtdEstoque(quantidade):
-    if quantidade < 0:
-        print("Quantidade de produtos inválida!")
+    
     
     
     

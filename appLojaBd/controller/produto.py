@@ -1,5 +1,4 @@
 from model.produto import Produto as ModelProduto
-from controller.validacoes import validaPreco, validaQtdEstoque, validaNome
 class Produto(object):
     '''
     classdocs
@@ -18,12 +17,18 @@ class Produto(object):
         self.mProduto = ModelProduto(self)
         
     def validaProduto(self):
-        validaPreco(self.preco_venda, self.preco_compra)
-        validaQtdEstoque(self.qtd_estoque)
-        validaNome(self.nome)
+        self.validaPreco(self.preco_venda, self.preco_compra)
+        self.validaQtdEstoque(self.qtd_estoque)
             
     def operacaoProduto(self, operacao):
         self.mProduto(operacao)
     
+    def validaPreco(self, venda, compra):
+        if venda < compra:
+            print("O preço de venda não deve ser menor que o preço de compra do produto")
+
+    def validaQtdEstoque(self, quantidade):
+        if quantidade < 0:
+            print("Quantidade de produtos inválida!")
              
         
