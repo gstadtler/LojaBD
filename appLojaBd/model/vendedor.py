@@ -18,3 +18,10 @@ class Vendedor(object):
         ret = conexao.cur.fetchone()
         conexao.close()
         return ret
+    
+    def verificaSupervisor(self, cpfVendedor):
+        conexao = conexao.Connection()
+        conexao.callProCedure(self, "verifica_supervisor" , cpfVendedor)
+        ret = conexao.cur.fetchone()
+        conexao.close()
+        return ret
