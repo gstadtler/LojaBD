@@ -9,6 +9,9 @@ class Connection():
 
     def query(self, query):
         self.cur.execute(query)
+        
+    def execute(self, query, values):
+        self.cur.execute(query, values)
     
     def queryResult(self):
         self.result = self.cur.fetchall()

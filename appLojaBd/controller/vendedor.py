@@ -21,9 +21,9 @@ class Vendedor(func.Funcionario):
         self.validaFuncionario(self.cpf, self.nome, self.email, self.senha)
         self.validaMeta(self.meta)
             
-    def novoVendedor(self,flagGerente, operacao):
-        if self.validaCargo(flagGerente) == True:
+    def novoVendedor(self, cpfGerente, operacao):
+        if self.validaCargo(cpfGerente) == True:
             self.validaVendedor()
-            self.operacaoFuncionario(operacao)
+            self.procIADFuncionario(operacao)
         else:
             print("Você não tem permissão para efetuar essa operação!")

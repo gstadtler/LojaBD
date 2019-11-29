@@ -13,6 +13,7 @@ class Cliente(object):
         self.numero = numero
         self.bairro = bairro
         self.cidade = cidade
+        self.mFornecedor = ModelFornecedor(self)
         
     def validaFornecedor(self):
         validaCnpj(self.cnpj)
@@ -20,5 +21,4 @@ class Cliente(object):
         validaEmail(self.email)
     
     def operacaoFornecedor(self, operacao):
-        mFornecedor = ModelFornecedor(self)
-        mFornecedor.procIADFornecedor(operacao)
+        self.mFornecedor.procIADFornecedor(operacao)

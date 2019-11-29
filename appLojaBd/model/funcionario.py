@@ -19,3 +19,10 @@ class Funcionario(object):
         conexao.callProCedure(self, "insere_atualiza_deleta_funcionario" , procValores)
         conexao.close()
         
+    def verificaGerente(self):
+        conexao = conexao.Connection()
+        conexao.execute('SELECT tagGerente FROM funcionario WHERE cpf = %s', (self.funcionario.cpf))
+        ret = conexao.cur.fetchall()
+        conexao.close()
+        return ret
+        

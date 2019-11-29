@@ -16,6 +16,7 @@ class Cliente(object):
         self.numero = numero
         self.bairro = bairro
         self.cidade = cidade
+        self.mCliente = ModelCliente(self)
         
     def validaCliente(self):
         validaCpf(self.cpf)
@@ -23,7 +24,6 @@ class Cliente(object):
         validaEmail(self.email)
     
     def operacaoCliente(self, operacao):
-        mCliente = ModelCliente(self)
-        mCliente.procIADCliente(operacao)
+        self.mCliente.procIADCliente(operacao)
         
         
