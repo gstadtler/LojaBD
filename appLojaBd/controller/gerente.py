@@ -19,6 +19,7 @@ class Gerente(func.Funcionario):
             self.procIADFuncionario(operacao)
         else:
             print("Você não tem permissão para efetuar essa operação!")
+            break
             
     def criarFuncionario(self, cpf, nome, email, senha, flagGerente, operacao):
         if flagGerente == True:

@@ -14,8 +14,12 @@ class Vendedor(func.Funcionario):
         self.meta = meta
       
     def validaMeta(self):
+        if self.meta.isdigit() == False:
+            print("Meta só pode conter numeros!")
+            break
         if (self.meta == 0):
             print("Informe uma meta para o vendedor!")
+            break
               
     def validaVendedor(self):
         self.validaFuncionario(self.cpf, self.nome, self.email, self.senha)
@@ -27,3 +31,4 @@ class Vendedor(func.Funcionario):
             self.procIADFuncionario(operacao)
         else:
             print("Você não tem permissão para efetuar essa operação!")
+            break
