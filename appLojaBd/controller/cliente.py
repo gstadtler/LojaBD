@@ -1,5 +1,6 @@
 from controller.validacoes import validaCpf, validaNome, validaEmail
 from model.cliente import Cliente as ModelCliente
+
 class Cliente(object):
     '''
     classDocs
@@ -25,5 +26,3 @@ class Cliente(object):
     
     def operacaoCliente(self, operacao):
         self.mCliente.procIADCliente(operacao)
-        
-        

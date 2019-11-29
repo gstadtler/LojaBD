@@ -19,14 +19,12 @@ class Gerente(func.Funcionario):
             self.procIADFuncionario(operacao)
         else:
             print("Você não tem permissão para efetuar essa operação!")
+            break
             
-    def criarFuncionario(self, cpf, nome, email, senha, flagGerente, operacao):
+    def criarFuncionario(self, cpf, nome, email, senha, flagGerente, operacao, cpfGerente=""):
         if flagGerente == True:
             gerente = Gerente(cpf, nome, email, senha, flagGerente)
             gerente.novoGerente(self.cpf, operacao)
         else:
-            vendedor = vend.Vendedor(cpf, nome, email, senha, flagGerente)
+            vendedor = vend.Vendedor(cpf, nome, email, senha, flagGerente, cpfGerente)
             vendedor.novoVendedor(self.cpf, operacao)
-             
-        
-        

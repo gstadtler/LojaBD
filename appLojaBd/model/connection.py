@@ -1,6 +1,5 @@
 import psycopg2
 
-
 class Connection():
 
     def __init__(self, host='localhost', db='LojaBD', user='postgres', password='postgres123'):

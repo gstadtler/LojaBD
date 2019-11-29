@@ -22,7 +22,6 @@ class Funcionario(object):
     def verificaGerente(self):
         conexao = conexao.Connection()
         conexao.execute('SELECT tagGerente FROM funcionario WHERE cpf = %s', (self.funcionario.cpf))
-        ret = conexao.cur.fetchall()
+        ret = conexao.cur.fetchone()
         conexao.close()
         return ret
-        

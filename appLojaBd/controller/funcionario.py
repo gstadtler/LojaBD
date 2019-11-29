@@ -1,5 +1,6 @@
-from model.funcionario import Funcionario
+from model.funcionario import Funcionario as modelFuncionario
 from controller.validacoes import validaCpf, validaNome, validaEmail
+
 class Funcionario(object):
     '''
     classdocs
@@ -15,7 +16,7 @@ class Funcionario(object):
         self.email = email
         self.senha = senha
         self.flagGerente = flagGerente
-        self.mFuncionario = Funcionario(self)
+        self.mFuncionario = modelFuncionario(self)
         
     def validaFuncionario(self):
         validaCpf(self.cpf)
@@ -34,6 +35,3 @@ class Funcionario(object):
             
     def operacaoFuncionario(self, operacao):
         self.mFuncionario.procIADFuncionario(operacao)
-    
-             
-        
