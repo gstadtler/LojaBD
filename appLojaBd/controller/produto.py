@@ -23,12 +23,12 @@ class Produto(object):
     def operacaoProduto(self, operacao):
         self.mProduto(operacao)
     
-    def validaPreco(self, venda, compra):
-        if venda < compra:
+    def validaPreco(self):
+        if self.preco_venda < self.preco_compra:
             print("O preço de venda não deve ser menor que o preço de compra do produto")
 
-    def validaQtdEstoque(self, quantidade):
-        if quantidade < 0:
+    def validaQtdEstoque(self):
+        if self.qtd_estoque < 0:
             print("Quantidade de produtos inválida!")
              
         

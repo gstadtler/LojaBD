@@ -41,22 +41,44 @@ CREATE OR REPLACE FUNCTION insere_atualiza_deleta_funcionario(
 	IN vCPF BIGINT,
     IN vNome_funcionario VARCHAR(50),
     IN vEmail_funcionario VARCHAR(20),
-	IN vSenha_funcionario VARCHAR(20))
+	IN vSenha_funcionario VARCHAR(20),
+	IN vFlag_gerente BOOL)
 	RETURNS void AS $$
-BEGIN   
-  IF (vOPR = 'I') THEN
-    INSERT INTO funcionario(cpf,nome,email,senha) VALUES (vCPF,vNome_funcionario,
-								  						  vEmail_funcionario,vSenha_funcionario);
-  ELSE
-  IF(vOPR = 'A') THEN
-    UPDATE cliente SET nome = vNome_funcionario,
-	email = vEmail_funcionario, 
-	senha = vSenha_funcionario WHERE cpf = vCPF;
-  ELSE
-  IF(vOPR = 'D')THEN
-    DELETE FROM funcionario WHERE cpf = vCPF;
-  ELSE
-    RAISE EXCEPTION 'ATENÇÃO! Operação diferente de I, D, A.';
+BEGIN
+    IF (vOPR = 'I') THEN
+      INSERT INTO funcionario(cpf,nome,email,senha,flag_gerente) VALUES (vCPF,vNome_funcionario,
+								  						  vEmail_funcionario,vSenha_funcionario,
+													      vFlag_gerente);
+	  IF(vFlag_gerente = True) THEN
+	    INSERT INTO gerente VALUES (vCPF);
+	  ELSE IF(vFlag_gerente = False) THEN                                               
+	    INSERT INTO vendedor VALUES (vCPF,49709849050,10);
+	  COMMIT;
+	  ELSE
+	    RAISE EXCEPTION 'Ocorreu algum problema...';
+		ROLLBACK;
+	  END IF;
+	  END IF;
+
+    ELSE IF(vOPR = 'A') THEN
+      UPDATE funcionario SET nome = vNome_funcionario, email = vEmail_funcionario, 
+	  senha = vSenha_funcionario, flag_gerente = vFlag_gerente WHERE cpf = vCPF;
+	
+    ELSE IF(vOPR = 'D')THEN
+	  IF(vFlag_gerente = True) THEN
+	  	DELETE FROM gerente WHERE cpf = vCPF;
+      	DELETE FROM funcionario WHERE cpf = vCPF;
+	  ELSE IF(vFlag_gerente = False) THEN
+	    DELETE FROM vendedor WHERE cpf = vCPF;
+		DELETE FROM funcionario WHERE cpf = vCPF;
+	  COMMIT;
+	  ELSE
+	    RAISE EXCEPTION 'Ocorreu algum problema...';
+		ROLLBACK;
+	  END IF;
+	  END IF;
+	ELSE
+	  RAISE EXCEPTION 'Atenção! Operação diferente de I, A ou D.';
   END IF;
   END IF;
   END IF;
