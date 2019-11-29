@@ -1,4 +1,5 @@
 from model import connection as conexao
+
 class Fornecedor(object):
     '''
     classdocs

@@ -27,7 +27,4 @@ class Gerente(func.Funcionario):
             gerente.novoGerente(self.cpf, operacao)
         else:
             vendedor = vend.Vendedor(cpf, nome, email, senha, flagGerente)
-            vendedor.novoVendedor(self.cpf, operacao)
-             
-        
-        
+            vendedor.novoVendedor(self.cpf, operacao)  

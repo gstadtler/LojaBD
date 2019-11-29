@@ -1,4 +1,5 @@
 from model.produto import Produto as ModelProduto
+
 class Produto(object):
     '''
     classdocs
@@ -29,6 +30,4 @@ class Produto(object):
 
     def validaQtdEstoque(self, quantidade):
         if quantidade < 0:
-            print("Quantidade de produtos inválida!")
-             
-        
+            print("Quantidade de produtos inválida!") 

@@ -1,4 +1,5 @@
 import controller.funcionario as func
+from model.vendedor import Vendedor as modelVendedor
 
 class Vendedor(func.Funcionario):
     '''
@@ -12,7 +13,7 @@ class Vendedor(func.Funcionario):
         Constructor
         '''
         self.meta = meta
-      
+        self.mVendedor = modelVendedor(self)
     def validaMeta(self):
         if self.meta.isdigit() == False:
             print("Meta só pode conter numeros!")
@@ -32,3 +33,7 @@ class Vendedor(func.Funcionario):
         else:
             print("Você não tem permissão para efetuar essa operação!")
             break
+    
+    def verificaMeta(self,mes,ano):
+        parametros = (self.cpf, mes, ano)
+        print(self.mVendedor.verificaMeta(parametros))       

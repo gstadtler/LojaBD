@@ -42,8 +42,3 @@ def validaCnpj(cnpj):
     elif len(cnpj) > 14:
         print("CNPJ possui mais de 14 digitos!")
         break
-        
-    
-    
-    
-    
