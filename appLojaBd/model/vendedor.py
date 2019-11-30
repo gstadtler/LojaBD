@@ -6,11 +6,10 @@ class Vendedor(object):
     '''
 
 
-    def __init__(self, vendedor):
+    def __init__(self):
         '''
         Constructor
         '''
-        self.vendedor = vendedor
     
     def verificaMeta(self, procValores):
         conexao = conexao.Connection()

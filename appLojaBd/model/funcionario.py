@@ -5,23 +5,30 @@ class Funcionario(object):
     '''
 
 
-    def __init__(self, funcionario):
+    def __init__(self):
         '''
         Constructor
         '''
-        self.funcionario = funcionario
     
-    def procIADFuncionario(self, operacao):
-        procValores = (operacao, self.funcionario.cpf, self.funcionario.nome, 
-                       self.funcionario.email, self.funcionario.senha, self.funcionario.flagGerente)
+    def procIADFuncionario(self, funcionario, operacao):
+        procValores = (operacao, funcionario.cpf, funcionario.nome, 
+                       funcionario.email, funcionario.senha, funcionario.flagGerente)
         
         conexao = conexao.Connection()
         conexao.callProCedure(self, "insere_atualiza_deleta_funcionario" , procValores)
         conexao.close()
         
-    def verificaGerente(self):
+    def verificaGerente(self, cpf):
         conexao = conexao.Connection()
-        conexao.execute('SELECT tagGerente FROM funcionario WHERE cpf = %s', (self.funcionario.cpf))
+        conexao.execute('SELECT tagGerente FROM funcionario WHERE cpf = %s', (cpf))
         ret = conexao.cur.fetchone()
         conexao.close()
         return ret
+    
+    def verificaFuncionario(self, cpf):
+        conexao = conexao.Connection()
+        conexao.execute('SELECT cpf FROM funcionario WHERE cpf = %s', (cpf))
+        ret = conexao.cur.fetchone()
+        conexao.close()
+        return ret
+        

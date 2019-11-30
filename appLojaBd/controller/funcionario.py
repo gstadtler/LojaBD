@@ -16,7 +16,7 @@ class Funcionario(object):
         self.email = email
         self.senha = senha
         self.flagGerente = flagGerente
-        self.mFuncionario = modelFuncionario(self)
+        self.mFuncionario = modelFuncionario()
         
     def validaFuncionario(self):
         validaCpf(self.cpf)
@@ -25,7 +25,7 @@ class Funcionario(object):
         self.validaSenha(self.senha)
         
     def validaCargo(self):
-        return self.mFuncionario.verificaGerente()
+        return self.mFuncionario.verificaGerente(self.cpf)
          
     def validaSenha(self):
         if (self.senha == ""):
@@ -34,4 +34,4 @@ class Funcionario(object):
             print("Senha possui mais de 50 caracteres!")
             
     def operacaoFuncionario(self, operacao):
-        self.mFuncionario.procIADFuncionario(operacao)
+        self.mFuncionario.procIADFuncionario(self, operacao)

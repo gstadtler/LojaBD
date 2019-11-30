@@ -16,7 +16,7 @@ class Gerente(func.Funcionario):
     def novoGerente(self, cpfGerente, operacao):
         if self.validaCargo(cpfGerente) == True:
             self.validaFuncionario(self.cpf, self.nome, self.email, self.senha)
-            self.procIADFuncionario(operacao)
+            self.procIADFuncionario(self, operacao)
         else:
             print("Você não tem permissão para efetuar essa operação!")
             break

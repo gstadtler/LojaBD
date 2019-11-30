@@ -6,17 +6,17 @@ class Fornecedor(object):
     '''
 
 
-    def __init__(self, fornecedor):
+    def __init__(self):
         '''
         Constructor    
         '''
-        self.fornecedor = fornecedor
     
-    def procIADFornecedor(self, operacao):
-        procValores = (operacao, self.fornecedor.cnpj, self.fornecedor.nome, 
-                       self.fornecedor.email, self.fornecedor.rua, self.fornecedor.numero,
-                       self.fornecedor.bairro, self.fornecedor.cidade)
+    def procIADFornecedor(self, fornecedor, operacao):
+        procValores = (operacao, fornecedor.cnpj, fornecedor.nome, 
+                       fornecedor.email, fornecedor.rua, fornecedor.numero,
+                       fornecedor.bairro, fornecedor.cidade)
         
         conexao = conexao.Connection()
         conexao.callProCedure(self, "insere_atualiza_deleta_fornecedor" , procValores)
+        conexao.commit()
         conexao.close()

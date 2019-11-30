@@ -6,17 +6,17 @@ class Cliente(object):
     '''
 
 
-    def __init__(self, cliente):
+    def __init__(self):
         '''
         Constructor
         '''
-        self.cliente = cliente
     
-    def procIADCliente(self, operacao):
-        procValores = (operacao, self.cliente.cpf, self.cliente.nome, 
-                       self.cliente.email, self.cliente.rua, self.cliente.numero,
-                       self.cliente.bairro, self.cliente.cidade)
+    def procIADCliente(self, cliente, operacao):
+        procValores = (operacao, cliente.cpf, cliente.nome, 
+                       cliente.email, cliente.rua, cliente.numero,
+                       cliente.bairro, cliente.cidade)
         
         conexao = conexao.Connection()
         conexao.callProCedure(self, "insere_atualiza_deleta_cliente" , procValores)
+        conexao.commit()
         conexao.close()

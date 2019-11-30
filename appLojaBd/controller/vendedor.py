@@ -13,7 +13,7 @@ class Vendedor(func.Funcionario):
         Constructor
         '''
         self.meta = meta
-        self.mVendedor = modelVendedor(self)
+        self.mVendedor = modelVendedor()
         self.cpfGerente = cpfGerente
         
     def validaMeta(self):
@@ -43,7 +43,7 @@ class Vendedor(func.Funcionario):
     def novoVendedor(self, cpfGerente, operacao):
         if self.validaCargo(cpfGerente) == True:
             self.validaVendedor()
-            self.procIADFuncionario(operacao)
+            self.procIADFuncionario(self, operacao)
         else:
             print("Você não tem permissão para efetuar essa operação!")
             break
