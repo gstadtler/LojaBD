@@ -16,6 +16,7 @@ class Produto(object):
         self.preco_compra = preco_compra
         self.qtd_estoque = qtd_estoque
         self.mProduto = ModelProduto()
+        self.quantidade = 0
         
     def validaProduto(self):
         self.validaPreco(self.preco_venda, self.preco_compra)
