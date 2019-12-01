@@ -6,8 +6,7 @@ def setUsuario(email, senha):
     usuario = session.checaUsuário(email, senha)
     if usuario == ():
         print("Email ou senha incorreto!")
-        break
+        return False
     else:
         funcionario = func.Funcionario(*usuario)
-    
-    return funcionario
+        return funcionario

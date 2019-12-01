@@ -28,12 +28,12 @@ class Produto(object):
     def validaPrecos(self):
         if self.preco_venda < self.preco_compra:
             print("O preço de venda não deve ser menor que o preço de compra do produto")
-            break
+            return False
 
     def validaQtdEstoque(self):
         if self.qtd_estoque < 0:
             print("Quantidade de produtos inválida!")
-            break
+            return False
     
     def listaProdutos(self):
         self.mProduto.retornaProdutos()
@@ -45,5 +45,5 @@ class Produto(object):
             params = ("ASC", limite)
         else:
             print("Operação inválida!")
-            break
+            return False
         self.mProduto.relatProdutosVendidos(params)

@@ -31,16 +31,17 @@ class Venda(object):
             del(self.produtosVenda[numProduto])
         except IndexError:
             print("Este produto não existe na lista de produtos!")
+            return False
         
     def iniciaVenda(self):
         ret = self.mFuncionario.verificaFuncionario(self.cpfFuncionario)
         if ret == "":
             print("Funcionario não encontrado!")
-            break
+            return False
         ret = self.mCliente.VerificaCliente(self.cpfCliente)
         if ret == "":
             print("Cliente não encontrado!")
-            break
+            return False
     
     def fechaVenda(self):
         pass
@@ -55,4 +56,5 @@ class Venda(object):
             self.mVenda.relatVendasFuncionarioPeriodo(*parametros)
         else:
             print("Operação inválida!")
+            return False
     

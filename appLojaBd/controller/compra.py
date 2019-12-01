@@ -36,11 +36,12 @@ class Compra(object):
         ret = self.mFuncionario.verificaFuncionario(self.cpfFuncionario)
         if ret == "":
             print("Funcionario não encontrado!")
-            break
+            return False
+
         ret = self.mFornecedor.VerificaFornecedor(self.cnpjFornecedor)
         if ret == "":
             print("Fornecedor não encontrado!")
-            break
+            return False
     
     def fechaCompra(self):
         pass

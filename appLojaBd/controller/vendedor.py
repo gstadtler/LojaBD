@@ -7,33 +7,33 @@ class Vendedor(func.Funcionario):
     '''
 
 
-    def __init__(self, cpf="", nome="", email="", senha="", flagGerente=False, meta=0, cpfGerente):
-        super().__init__(cpf, nome, email, senha, flagGerente)
+    def __init__(self, cpf, nome, email, senha, flagGerente, meta, cpfGerente):
+        super().__init__(cpf="", nome="", email="", senha="", flagGerente=False)
         '''
         Constructor
         '''
-        self.meta = meta
+        self.meta = 0
         self.mVendedor = modelVendedor()
         self.cpfGerente = cpfGerente
         
     def validaMeta(self):
         if self.meta.isdigit() == False:
             print("Meta só pode conter numeros!")
-            break
+            return False
         if (self.meta == 0):
             print("Informe uma meta para o vendedor!")
-            break
+            return False
 
     def validaCpfGerente(self):
         if self.cpfGerente == "":
             print("CPF do gerente em branco!")
-            break
+            return False
         elif self.cpfGerente.isdigit() == False:
             print("CPF do gerente só pode conter numeros!")
-            break
+            return False
         elif len(self.cpfGerente) > 11:
             print("CPF do gerente possui mais de 11 digitos!")
-            break
+            return False
 
     def validaVendedor(self):
         self.validaFuncionario(self.cpf, self.nome, self.email, self.senha)
@@ -46,7 +46,7 @@ class Vendedor(func.Funcionario):
             self.procIADFuncionario(self, operacao)
         else:
             print("Você não tem permissão para efetuar essa operação!")
-            break
+            return False
     
     def verificaMeta(self,mes,ano):
         parametros = (self.cpf, mes, ano)

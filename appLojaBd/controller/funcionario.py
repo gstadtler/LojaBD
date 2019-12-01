@@ -19,10 +19,14 @@ class Funcionario(object):
         self.mFuncionario = modelFuncionario()
         
     def validaFuncionario(self):
-        validaCpf(self.cpf)
-        validaNome(self.nome)
-        validaEmail(self.email)
-        self.validaSenha(self.senha)
+        if validaCpf(self.cpf) == False:
+            return False
+        elif validaNome(self.nome) == False:
+            return False
+        elif validaEmail(self.email) == False:
+            return False
+        elif self.validaSenha(self.senha) == False:
+            return False
         
     def validaCargo(self):
         return self.mFuncionario.verificaGerente(self.cpf)
@@ -30,8 +34,10 @@ class Funcionario(object):
     def validaSenha(self):
         if (self.senha == ""):
             print("Senha em branco!")
+            return False
         elif (len(self.senha) > 50):
             print("Senha possui mais de 50 caracteres!")
+            return False
             
     def operacaoFuncionario(self, operacao):
         self.mFuncionario.procIADFuncionario(self, operacao)

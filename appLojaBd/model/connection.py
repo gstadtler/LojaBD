@@ -1,10 +1,35 @@
 import psycopg2
+from configparser import ConfigParser
 
 class Connection():
 
-    def __init__(self, host='localhost', db='LojaBD', user='postgres', password='postgres123'):
-        self.conn = psycopg2.connect(host=host, database=db, user=user, password=password)
+    def __init__(self):
+        self.conn = self.connect()
         self.cur = self.conn.cursor()
+
+    def config(self, filename='/home/danilo/git/LojaBD/appLojaBd/database.ini', section='postgresql'):
+        parser = ConfigParser()
+        # ler o arquivo config
+        parser.read(filename)
+     
+        # pega sessão, padrão para postgresql
+        db = {}
+        if parser.has_section(section):
+            params = parser.items(section)
+            for param in params:
+                db[param[0]] = param[1]
+        else:
+            raise Exception('Section {0} not found in the {1} file'.format(section, filename))
+     
+        return db
+    
+    def connect(self):
+        """ Conectando ao servidor do banco PostgreSQL """
+        try:
+            params = self.config()
+            return psycopg2.connect(**params)
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
 
     def query(self, query):
         self.cur.execute(query)
