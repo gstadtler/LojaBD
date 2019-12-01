@@ -24,3 +24,10 @@ class Vendedor(object):
         ret = conexao.cur.fetchone()
         conexao.close()
         return ret
+    
+    def retornaVendedores(self):
+        conexao = conexao.Connection()
+        print('')
+        conexao.query('SELECT * FROM vendedor')
+        conexao.queryResult()
+        conexao.close()

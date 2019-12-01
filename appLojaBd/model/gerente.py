@@ -18,3 +18,10 @@ class Gerente(object):
         conexao.callProCedure(self, "verifica_supervisionados" , param)
         conexao.getqueryResult()
         conexao.close()
+        
+    def retornaGerentes(self):
+        conexao = conexao.Connection()
+        print('')
+        conexao.query('SELECT * FROM gerente')
+        conexao.queryResult()
+        conexao.close()    

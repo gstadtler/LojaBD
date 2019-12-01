@@ -20,3 +20,10 @@ class Fornecedor(object):
         conexao.callProCedure(self, "insere_atualiza_deleta_fornecedor" , procValores)
         conexao.commit()
         conexao.close()
+        
+    def retornaFornecedores(self):
+        conexao = conexao.Connection()
+        print('')
+        conexao.query('SELECT * FROM fornecedor')
+        conexao.queryResult()
+        conexao.close()

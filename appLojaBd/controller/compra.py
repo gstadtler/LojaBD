@@ -1,6 +1,7 @@
 from datetime import datetime
 from model.funcionario import Funcionario as modelFuncionario
 from model.fornecedor import Fornecedor as modelFornecedor
+from model.compra import Compra as modelCompra
 
 class Compra(object):
     '''
@@ -20,6 +21,7 @@ class Compra(object):
         self.produtosCompra = []
         self.mFornecedor = modelFornecedor()
         self.mFuncionario = modelFuncionario()
+        self.mCompra = modelCompra()
     
     def addProduto(self, produto):
         self.produtosCompra.append(produto)
@@ -42,3 +44,8 @@ class Compra(object):
     
     def fechaCompra(self):
         pass
+    
+    def listaCompras(self):
+        self.mCompra.retornaCompras()
+        
+        

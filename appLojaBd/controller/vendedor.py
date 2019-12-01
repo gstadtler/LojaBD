@@ -53,4 +53,7 @@ class Vendedor(func.Funcionario):
         print(self.mVendedor.verificaMeta(parametros))
         
     def verificaSupervisor(self):
-        print(self.mVendedor.verificaSupervisor(self.cpf)) 
+        print(self.mVendedor.verificaSupervisor(self.cpf))
+        
+    def listaVendedores(self):
+        self.mVendedor.retornaVendedores()

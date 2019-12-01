@@ -1,4 +1,5 @@
 from model import cliente
+from model import compra
 from model import connection
 from model import fornecedor
 from model import funcionario

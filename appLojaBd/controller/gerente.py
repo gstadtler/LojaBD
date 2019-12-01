@@ -1,5 +1,6 @@
 import controller.funcionario as func
 import controller.vendedor as vend
+from model.gerente import  Gerente as modelGerente
 
 class Gerente(func.Funcionario):
     '''
@@ -12,7 +13,7 @@ class Gerente(func.Funcionario):
         '''
         Constructor
         '''
-        
+        self.mGerente = modelGerente()
     def novoGerente(self, cpfGerente, operacao):
         if self.validaCargo(cpfGerente) == True:
             self.validaFuncionario(self.cpf, self.nome, self.email, self.senha)
@@ -28,3 +29,9 @@ class Gerente(func.Funcionario):
         else:
             vendedor = vend.Vendedor(cpf, nome, email, senha, flagGerente, cpfGerente)
             vendedor.novoVendedor(self.cpf, operacao)
+    
+    def listaGerentes(self):
+        self.mGerente.retornaGerentes()
+        
+    def listaSupervisionados(self):
+        self.mGerente.verificaSupervisionados()

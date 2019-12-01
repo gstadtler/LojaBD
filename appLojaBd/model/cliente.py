@@ -20,3 +20,10 @@ class Cliente(object):
         conexao.callProCedure(self, "insere_atualiza_deleta_cliente" , procValores)
         conexao.commit()
         conexao.close()
+        
+    def retornaClientes(self):
+        conexao = conexao.Connection()
+        print('')
+        conexao.query('SELECT * FROM cliente')
+        conexao.queryResult()
+        conexao.close()

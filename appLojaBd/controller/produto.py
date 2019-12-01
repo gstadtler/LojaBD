@@ -34,3 +34,5 @@ class Produto(object):
         if self.qtd_estoque < 0:
             print("Quantidade de produtos inválida!")
             break
+    def listaProdutos(self):
+        self.mProduto.retornaProdutos()

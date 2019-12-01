@@ -23,3 +23,6 @@ class Cliente(object):
     
     def operacaoFornecedor(self, operacao):
         self.mFornecedor.procIADFornecedor(self, operacao)
+    
+    def listaFornecedores(self):
+        self.mFornecedor.retornaFornecedores()

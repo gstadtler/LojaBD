@@ -26,3 +26,6 @@ class Cliente(object):
     
     def operacaoCliente(self, operacao):
         self.mCliente.procIADCliente(self, operacao)
+    
+    def listaClientes(self):
+        self.mCliente.retornaClientes()

@@ -31,4 +31,11 @@ class Funcionario(object):
         ret = conexao.cur.fetchone()
         conexao.close()
         return ret
+    
+    def retornaFuncionarios(self):
+        conexao = conexao.Connection()
+        print('')
+        conexao.query('SELECT * FROM funcionario')
+        conexao.queryResult()
+        conexao.close()
         

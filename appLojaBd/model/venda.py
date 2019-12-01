@@ -28,3 +28,10 @@ class Venda(object):
         finally:
             if conexao is not None:
                 conexao.close()
+                
+    def retornaVendas(self):
+        conexao = conexao.Connection()
+        print('')
+        conexao.query('SELECT * FROM venda')
+        conexao.queryResult()
+        conexao.close()    

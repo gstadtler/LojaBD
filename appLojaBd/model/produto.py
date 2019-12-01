@@ -18,3 +18,10 @@ class Produto(object):
         conexao = conexao.Connection()
         conexao.callProCedure(self, "insere_atualiza_deleta_produto" , procValores)
         conexao.close()
+        
+    def retornaProdutos(self):
+        conexao = conexao.Connection()
+        print('')
+        conexao.query('SELECT * FROM produto')
+        conexao.queryResult()
+        conexao.close()

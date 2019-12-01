@@ -1,6 +1,7 @@
 from datetime import datetime
 from model.funcionario import Funcionario as modelFuncionario
 from model.cliente import Cliente as modelCliente
+from model.venda import Venda as modelVenda
 
 class Venda(object):
     '''
@@ -20,7 +21,8 @@ class Venda(object):
         self.produtosVenda = []
         self.mCliente = modelCliente()
         self.mFuncionario = modelFuncionario()
-    
+        self.mVenda = modelVenda() 
+           
     def addProduto(self, produto):
         self.produtosVenda.append(produto)
     
@@ -42,3 +44,7 @@ class Venda(object):
     
     def fechaVenda(self):
         pass
+    
+    def listaVendas(self):
+        self.mVenda.retornaVendas()
+    

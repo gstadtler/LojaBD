@@ -35,3 +35,6 @@ class Funcionario(object):
             
     def operacaoFuncionario(self, operacao):
         self.mFuncionario.procIADFuncionario(self, operacao)
+
+    def listaFuncionarios(self):
+        self.mFuncionario.retornaFuncionarios()
