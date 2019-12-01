@@ -48,4 +48,12 @@ class Compra(object):
     def listaCompras(self):
         self.mCompra.retornaCompras()
         
+    def relatoriosCompras(self, op, parametros):
+        if op == 1:
+            self.mCompra.relatComprasPeriodo(*parametros)
+        elif op == 2:
+            self.mCompra.relatComprasFornecedorPeriodo(*parametros)
+        else:
+            print("Operação inválida!")
+        
         

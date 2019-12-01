@@ -34,4 +34,23 @@ class Compra(object):
         print('')
         conexao.query('SELECT * FROM compra_entrada')
         conexao.queryResult()
-        conexao.close()    
+        conexao.close()
+
+    def relatComprasPeriodo(self, dataInicial, dataFinal):
+        conexao = conexao.Connection()
+        params = (dataInicial, dataFinal)
+        conexao.execute('''SELECT * FROM compra_entrada 
+                            WHERE data_compra BETWEEN %s 
+                            AND %s ''', params)
+        conexao.queryResult()
+        conexao.close()
+    
+    def relatComprasFornecedorPeriodo(self, dataInicial, dataFinal, cnpjFornecedor):
+        conexao = conexao.Connection()
+        params = (dataInicial, dataFinal, cnpjFornecedor)
+        conexao.execute('''SELECT * FROM compra_entrada 
+                            WHERE data_compra BETWEEN %s 
+                            AND %s 
+                            AND cnpj_fornecedor = %s''', params)
+        conexao.queryResult()
+        conexao.close()

@@ -47,4 +47,12 @@ class Venda(object):
     
     def listaVendas(self):
         self.mVenda.retornaVendas()
+          
+    def relatoriosVendas(self, op, parametros):
+        if op == 1:
+            self.mVenda.relatVendasPeriodo(*parametros)
+        elif op == 2:
+            self.mVenda.relatVendasFuncionarioPeriodo(*parametros)
+        else:
+            print("Operação inválida!")
     

@@ -34,5 +34,16 @@ class Produto(object):
         if self.qtd_estoque < 0:
             print("Quantidade de produtos inválida!")
             break
+    
     def listaProdutos(self):
         self.mProduto.retornaProdutos()
+        
+    def relatProdutos(self, op, limite):
+        if op == 1:
+            params = ("DESC", limite)
+        elif op == 2:
+            params = ("ASC", limite)
+        else:
+            print("Operação inválida!")
+            break
+        self.mProduto.relatProdutosVendidos(params)
