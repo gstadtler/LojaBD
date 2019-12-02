@@ -1,5 +1,4 @@
 from datetime import datetime
-from model.funcionario import Funcionario as modelFuncionario
 from model.fornecedor import Fornecedor as modelFornecedor
 from model.compra import Compra as modelCompra
 
@@ -9,18 +8,16 @@ class Compra(object):
     '''
 
 
-    def __init__(self, cpfFuncionario, cnpjFornecedor):
+    def __init__(self, cnpjFornecedor):
         '''
         Constructor
         '''
-        self.idSaida = 0
-        self.cpfFuncionario = cpfFuncionario
+        self.idEntrada = 0
         self.cnpjFornecedor = cnpjFornecedor
         self.dataCompra = datetime.now()
         self.valorTotal = 0
         self.produtosCompra = []
         self.mFornecedor = modelFornecedor()
-        self.mFuncionario = modelFuncionario()
         self.mCompra = modelCompra()
     
     def addProduto(self, produto):
@@ -33,11 +30,6 @@ class Compra(object):
             print("Este produto não existe na lista de produtos!")
         
     def iniciaCompra(self):
-        ret = self.mFuncionario.verificaFuncionario(self.cpfFuncionario)
-        if ret == "":
-            print("Funcionario não encontrado!")
-            return False
-
         ret = self.mFornecedor.VerificaFornecedor(self.cnpjFornecedor)
         if ret == "":
             print("Fornecedor não encontrado!")

@@ -84,3 +84,59 @@ BEGIN
   END IF;
 END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION insere_atualiza_deleta_fornecedor(
+    IN vOPR CHAR,
+	IN vCnpj BIGINT,
+    IN vNome VARCHAR(50),
+    IN vEmail VARCHAR(20),
+	IN vRua VARCHAR(20),
+	IN vNumero INTEGER,
+	IN vBairro VARCHAR(20),
+	IN vCidade VARCHAR(20)) 
+	RETURNS void AS $$
+BEGIN   
+  IF (vOPR = 'I') THEN
+    INSERT INTO fornecedor(cnpj,nome,email,rua,numero,bairro,cidade)
+	VALUES (vCnpj,vNome,vEmail,vRua,vNumero,vBairro,vCidade);
+  ELSE
+  IF(vOPR = 'A') THEN
+    UPDATE fornecedor SET nome = vNome, email = vEmail, rua = vRua,
+	numero = vNumero, bairro = vBairro, cidade = vCidade WHERE cnpj = vCnpj;
+  ELSE
+  IF(vOPR = 'D')THEN
+    DELETE FROM fornecedor WHERE cnpj = vCnpj;
+  ELSE
+    RAISE EXCEPTION 'ATENÇÃO! Operação diferente de I, D, A.';
+  END IF;
+  END IF;
+  END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION insere_atualiza_deleta_produto(
+    IN vOPR CHAR,
+	IN vId_produto INTEGER,
+    IN vNome VARCHAR(50),
+    IN vPreco_venda INTEGER,
+	IN vPreco_compra INTEGER,
+	IN vQtd_estoque INTEGER)
+	RETURNS void AS $$
+BEGIN   
+  IF (vOPR = 'I') THEN
+    INSERT INTO produto(id_produto,nome,preco_venda,preco_compra,qtd_estoque)
+	VALUES (vId_produto,vNome,vPreco_venda,vPreco_compra,vQtd_estoque);
+  ELSE
+  IF(vOPR = 'A') THEN
+    UPDATE produto SET nome = vNome, preco_venda = vPreco_venda,
+	preco_compra = vPreco_compra, qtd_estoque = vQtd_estoque WHERE id_produto = vId_produto;
+  ELSE
+  IF(vOPR = 'D')THEN
+    DELETE FROM produto WHERE id_produto = vId_produto;
+  ELSE
+    RAISE EXCEPTION 'ATENÇÃO! Operação diferente de I, D, A.';
+  END IF;
+  END IF;
+  END IF;
+END;
+$$ LANGUAGE plpgsql;

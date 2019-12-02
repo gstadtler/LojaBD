@@ -31,7 +31,7 @@ class Produto(object):
         print('')
         conexao.execute('''SELECT vp.id_produto_produto, p.nome, sum(vp.quantidade) AS qtd_total
                             FROM venda_produto AS vp
-                            JOIN produto AS p ON ( p.id_produto = vp.id_produto_produto )
+                            INNER JOIN produto AS p ON ( p.id_produto = vp.id_produto_produto )
                             GROUP BY vp.id_produto_produto, p.nome
                             ORDER BY
                             qtd_total %s 

@@ -11,7 +11,7 @@ class Venda(object):
         '''
     def insereVenda(self, venda):
         try:        
-            procValores = (venda.cpfFuncionario, venda.cpfCliente, venda.dataVenda)
+            procValores = (venda.cpfFuncionario, venda.cpfCliente, venda.dataVenda, venda.valorTotal)
             conexao = conexao.Connection()
             conexao.callProCedure(self, "insere_venda" , procValores)
             codVenda = conexao.cur.fetchone()
