@@ -46,6 +46,7 @@ def menuclientes():
             if op != "1" and op != "2":
                 print("Opção inválida!")    
             elif op == "1":
+                print("Os Valores que não deseja editar, deixe vazio!")
                 edtIstDelCliente("A")
             elif op == "2":
                 edtIstDelCliente("D")
@@ -55,9 +56,12 @@ def menuclientes():
  
 print("Bem vindo ao Akatsuki Vendas.")
 print("Por favor, efetue o login.")
-# usuario = menuLogin()
 
-#print("Olá",usuario.nome,"Selecione a opção desejada: ")
+''' Descomentar Após testes!
+usuario = menuLogin()
+print("Olá",usuario.nome,"Selecione a opção desejada: ") 
+'''
+
 print('''
          1 - Clientes
          2 - Fornecedores

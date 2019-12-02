@@ -27,11 +27,27 @@ class Cliente(object):
         if validaEmail(self.email) == False:
             return False
     
+    def dadosEdicaoCli(self, nome, email, rua, numero, bairro, cidade):
+        if self.nome == "":
+            self.nome = nome
+        if self.email == "":
+            self.email = email
+        if self.rua == "":
+            self.rua = rua
+        if self.numero  == "":
+            self.numero = numero
+        if self.bairro == "":
+            self.bairro = bairro
+        if self.cidade == "":
+            self.cidade = cidade
+        
     def operacaoCliente(self, operacao):
-        if operacao != "D":
+        if operacao == "I":
             if self.validaCliente() == False:
                 return False
         else:
+            dadosCli = self.mCliente.recuperaDados(self.cpf)
+            self.dadosEdicaoCli(*dadosCli)
             self.mCliente.procIADCliente(self, operacao)
     
     def listaClientes(self):
