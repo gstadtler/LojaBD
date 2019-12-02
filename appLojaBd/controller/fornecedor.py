@@ -1,7 +1,7 @@
 from controller.validacoes import validaCnpj, validaNome, validaEmail
 from model.fornecedor import Fornecedor as ModelFornecedor
 
-class Cliente(object):
+class Fornecedor(object):
     
     def __init__(self, cnpj="", nome="", email="", rua="", numero="" ,bairro="", cidade=""):
         '''

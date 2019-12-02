@@ -23,7 +23,7 @@ class Produto(object):
         self.validaQtdEstoque(self.qtd_estoque)
             
     def operacaoProduto(self, operacao):
-        self.mProduto(operacao)
+        self.mProduto.procIADProduto(self, operacao)
     
     def validaPrecos(self):
         if self.preco_venda < self.preco_compra:

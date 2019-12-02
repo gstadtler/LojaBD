@@ -1,4 +1,5 @@
 from model import connection as conexao
+#from builtins import None
 class Produto(object):
     '''
     classdocs
@@ -12,7 +13,11 @@ class Produto(object):
         self.produto = produto
     
     def procIADProduto(self, produto, operacao):
-        procValores = (operacao, produto.id, produto.nome, 
+        conexao = conexao.Connection()
+        conexao.callProCedure(self, "get_lastId_produto")
+        codProd = conexao.cur.fetchone()
+        
+        procValores = (operacao, codProd, produto.nome, 
                        produto.preco_venda, produto.preco_compra, produto.qtd_estoque)
         
         conexao = conexao.Connection()

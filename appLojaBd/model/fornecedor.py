@@ -22,8 +22,8 @@ class Fornecedor(object):
         conexao.close()
         
     def retornaFornecedores(self):
-        conexao = conexao.Connection()
+        conect = conexao.Connection()
         print('')
-        conexao.query('SELECT * FROM fornecedor')
-        conexao.queryResult()
-        conexao.close()
+        conect.query('SELECT * FROM fornecedor')
+        conect.queryResult()
+        conect.close()

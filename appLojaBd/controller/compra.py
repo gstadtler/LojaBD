@@ -14,7 +14,7 @@ class Compra(object):
         '''
         self.idEntrada = 0
         self.cnpjFornecedor = cnpjFornecedor
-        self.dataCompra = datetime.now()
+        self.dataCompra = datetime.today().strftime('%Y-%m-%d')
         self.valorTotal = 0
         self.produtosCompra = []
         self.mFornecedor = modelFornecedor()
@@ -36,7 +36,7 @@ class Compra(object):
             return False
     
     def fechaCompra(self):
-        pass
+        self.mCompra.insereCompra(self)
     
     def listaCompras(self):
         self.mCompra.retornaCompras()
@@ -48,5 +48,6 @@ class Compra(object):
             self.mCompra.relatComprasFornecedorPeriodo(*parametros)
         else:
             print("Operação inválida!")
+            return False
         
         

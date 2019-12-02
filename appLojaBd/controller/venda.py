@@ -16,7 +16,7 @@ class Venda(object):
         self.idSaida = 0
         self.cpfFuncionario = cpfFuncionario
         self.cpfCliente = cpfCliente
-        self.dataVenda = datetime.now()
+        self.dataVenda = datetime.today().strftime('%Y-%m-%d')
         self.valorTotal = 0
         self.produtosVenda = []
         self.mCliente = modelCliente()
@@ -44,7 +44,7 @@ class Venda(object):
             return False
     
     def fechaVenda(self):
-        pass
+        self.mVenda.insereVenda(self)
     
     def listaVendas(self):
         self.mVenda.retornaVendas()
@@ -54,6 +54,8 @@ class Venda(object):
             self.mVenda.relatVendasPeriodo(*parametros)
         elif op == 2:
             self.mVenda.relatVendasFuncionarioPeriodo(*parametros)
+        elif op == 3:
+            self.mVenda.relTotVendasFuncionarioPeriodo(*parametros)
         else:
             print("Operação inválida!")
             return False

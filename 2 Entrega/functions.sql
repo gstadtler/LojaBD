@@ -50,6 +50,17 @@ BEGIN
 END; 
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION get_lastId_produto ()
+	RETURNS INTEGER AS $$
+DECLARE
+	lastIdProduto INTEGER;
+	newIdProduto INTEGER;
+BEGIN 
+	SELECT max(id_produto) FROM produto INTO lastIdProduto;
+	newIdProduto := lastIdProduto +1;
+	RETURN newIdProduto;
+END; 
+$$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION verifica_supervisor(IN cpf_vendedor BIGINT)
 	RETURNS VARCHAR(50) AS $$
