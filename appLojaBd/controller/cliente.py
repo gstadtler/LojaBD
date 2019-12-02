@@ -20,12 +20,19 @@ class Cliente(object):
         self.mCliente = ModelCliente()
         
     def validaCliente(self):
-        validaCpf(self.cpf)
-        validaNome(self.nome)
-        validaEmail(self.email)
+        if validaCpf(self.cpf) == False:
+            return False
+        if validaNome(self.nome) == False:
+            return False
+        if validaEmail(self.email) == False:
+            return False
     
     def operacaoCliente(self, operacao):
-        self.mCliente.procIADCliente(self, operacao)
+        if operacao != "D":
+            if self.validaCliente() == False:
+                return False
+        else:
+            self.mCliente.procIADCliente(self, operacao)
     
     def listaClientes(self):
         self.mCliente.retornaClientes()

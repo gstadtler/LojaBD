@@ -4,7 +4,7 @@ from controller import funcionario as func
 def setUsuario(email, senha):
     
     usuario = session.checaUsuário(email, senha)
-    if usuario == ():
+    if usuario == None:
         print("Email ou senha incorreto!")
         return False
     else:

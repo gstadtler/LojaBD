@@ -1,4 +1,4 @@
-from model import connection as conexao
+from model import connection as conex
 
 class Cliente(object):
     '''
@@ -10,19 +10,18 @@ class Cliente(object):
         '''
         Constructor
         '''
-    
     def procIADCliente(self, cliente, operacao):
         procValores = (operacao, cliente.cpf, cliente.nome, 
                        cliente.email, cliente.rua, cliente.numero,
                        cliente.bairro, cliente.cidade)
         
-        conexao = conexao.Connection()
-        conexao.callProCedure(self, "insere_atualiza_deleta_cliente" , procValores)
+        conexao = conex.Connection()
+        conexao.callProCedure("insere_atualiza_deleta_cliente" , procValores)
         conexao.commit()
         conexao.close()
         
     def retornaClientes(self):
-        conexao = conexao.Connection()
+        conexao = conex.Connection()
         print('')
         conexao.query('SELECT * FROM cliente')
         conexao.queryResult()

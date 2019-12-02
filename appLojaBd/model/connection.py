@@ -5,6 +5,7 @@ class Connection():
 
     def __init__(self):
         self.conn = self.connect()
+        self.conn.autocommit = False
         self.cur = self.conn.cursor()
 
     def config(self, filename='/home/danilo/git/LojaBD/appLojaBd/database.ini', section='postgresql'):
@@ -44,6 +45,12 @@ class Connection():
             
     def callProCedure(self,procNome,procValores):
         self.cur.callproc(procNome, procValores)     
+        
+    def commit(self):
+        self.conn.commit()
+        
+    def rollBack(self):
+        self.conn.rollback()  
               
     def close(self):
         self.cur.close()

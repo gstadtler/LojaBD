@@ -3,6 +3,7 @@ Arquivo de validações genéricas para os demais objetos
 '''
 
 def validaNome(nome):
+    nome = nome.strip()
     if nome == "":
         print("Nome em branco!")
         return False
