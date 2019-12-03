@@ -1,3 +1,5 @@
+import os
+import time
 from datetime import datetime
 from controller.sessao import setUsuario
 from controller.cliente import Cliente 
@@ -67,6 +69,8 @@ def menuclientes():
         elif op == "2":
             edtIstDelCliente("I")
         elif op == "3":
+            time.sleep(2)
+            os.system('clear')
             return False
             
 def edtIstDelFornecedor(op):
@@ -255,9 +259,10 @@ def menuCompras():
         print('''
                  1 - Listar Compras
                  2 - Cadastrar Compras
-                 3 - Relatórios ''')
+                 3 - Relatórios 
+                 4 - Voltar ''')
         op = input("Opção: ")
-        if op != "1" and op != "2" and op != "3":
+        if op != "1" and op != "2" and op != "3" and op != "4":
             print("Opção inválida!")
         elif op == "1":
             compra = Compra()
@@ -268,9 +273,10 @@ def menuCompras():
             compra = Compra()
             print('''
                     1 - Relatório de compras por período
-                    2 - Relatório de compras por período e fornecedor ''')
+                    2 - Relatório de compras por período e fornecedor
+                    3 - Voltar ''')
             opRelatorio = input("Opção: ")
-            if opRelatorio != "1" and opRelatorio != "2":
+            if opRelatorio != "1" and opRelatorio != "2" and opRelatorio != "3":
                 print("Opção inválida!")
             elif opRelatorio == "1":
                 inicio = input("Data de início(ano-mes-dia): ")
@@ -281,7 +287,11 @@ def menuCompras():
                 fim = input("Data do término(ano-mes-dia): ")
                 cnpj_forn = input("CNPJ do fornecedor: ")
                 compra.relatoriosCompras(2, inicio, fim, cnpj_forn)
-                
+            elif opRelatorio == "3":
+                return False
+        elif op == "4":
+            return False
+        
 def IstVenda():
     id_saida =""
     cpfFuncionario = input("CPF do Funcionário: ")
@@ -296,9 +306,10 @@ def menuVendas():
         print('''
                  1 - Listar Vendas
                  2 - Cadastrar Vendas
-                 3 - Relatórios ''')
+                 3 - Relatórios 
+                 4 - Voltar ''')
         op = input("Opção: ")
-        if op != "1" and op != "2" and op != "3":
+        if op != "1" and op != "2" and op != "3" and op != "4":
             print("Opção inválida!")
         elif op == "1":
             venda = Venda()
@@ -310,9 +321,10 @@ def menuVendas():
             print('''
                     1 - Relatório de vendas por período
                     2 - Relatório de vendas por período e funcionário
-                    3 - Relatório de total de vendas por período e funcionário ''')
+                    3 - Relatório de total de vendas por período e funcionário 
+                    4 - Voltar ''')
             opRelatorio = input("Opção: ")
-            if opRelatorio != "1" and opRelatorio != "2" and opRelatorio != "3":
+            if opRelatorio != "1" and opRelatorio != "2" and opRelatorio != "3" and opRelatorio != "4":
                 print("Opção inválida!")
             elif opRelatorio == "1":
                 inicio = input("Data de início(ano-mes-dia): ")
@@ -328,6 +340,11 @@ def menuVendas():
                 fim = input("Data do término(ano-mes-dia): ")
                 cpf_func = input("CPF do funcionário: ")
                 venda.relatoriosVendas(3, inicio, fim, cpf_func)
+            elif opRelatorio == "4":
+                return False
+        elif op == "4":
+            return False
+        
 
 print("Bem vindo ao Akatsuki Vendas.")
 print("Por favor, efetue o login.")
@@ -346,7 +363,8 @@ while not False:
              3 - Funcionarios
              4 - Produtos 
              5 - Compras 
-             6 - Vendas''')
+             6 - Vendas
+             7 - Sair ''')
     opcao = input("Opção: ")
     
     if opcao == "1":
@@ -365,5 +383,7 @@ while not False:
         menuCompras()
     elif opcao == "6":
         menuVendas()
+    elif opcao == "7":
+        usuario = False
     else:
         print("Opção inválida!")
