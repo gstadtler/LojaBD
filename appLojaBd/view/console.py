@@ -37,28 +37,34 @@ def edtIstDelCliente(op):
     
 def menuclientes():
     while not False:
-        print('''
+        print('''Menu de Clientes:
                  1 - Listar clientes
-                 2 - Cadastrar Clientes''')
+                 2 - Cadastrar Clientes
+                 3 - Voltar''')
         op = input("Opção: ")
-        if op != "1" and op != "2":
+        if op != "1" and op != "2" and op != "3":
             print("Opção inválida!")
         elif op == "1":
             cli = Cliente()
             cli.listaClientes()
             print('''
                      1 - Editar cliente
-                     2 - Excluir Cliente''')
+                     2 - Excluir Cliente
+                     3 - Voltar''')
             op = input("Opção: ")
-            if op != "1" and op != "2":
+            if op != "1" and op != "2" and op != "3":
                 print("Opção inválida!")    
             elif op == "1":
                 print("Os Valores que não deseja editar, deixe vazio!")
                 edtIstDelCliente("A")
             elif op == "2":
                 edtIstDelCliente("D")
+            elif op == "3":
+                False
         elif op == "2":
             edtIstDelCliente("I")
+        elif op == "3":
+            return False
             
 def edtIstDelFornecedor(op):
     nome = ""
@@ -80,28 +86,34 @@ def edtIstDelFornecedor(op):
     
 def menuFornecedores():
     while not False:
-        print('''
-                 1 - Listar Fornecedores
-                 2 - Cadastrar Fornecedores''')
+        print('''Menu de Fornecedores: 
+                     1 - Listar Fornecedores 
+                     2 - Cadastrar Fornecedores 
+                     3 - Voltar''')
         op = input("Opção: ")
-        if op != "1" and op != "2":
+        if op != "1" and op != "2" and op != "3":
             print("Opção inválida!")
         elif op == "1":
             forn = Fornecedor()
             forn.listaFornecedores()
             print('''
                      1 - Editar Fornecedor
-                     2 - Excluir Fornecedor''')
+                     2 - Excluir Fornecedor
+                     3 - Voltar''')
             op = input("Opção: ")
-            if op != "1" and op != "2":
+            if op != "1" and op != "2" and op != "3":
                 print("Opção inválida!")    
             elif op == "1":
                 print("Os Valores que não deseja editar, deixe vazio!")
                 edtIstDelFornecedor("A")
             elif op == "2":
                 edtIstDelFornecedor("D")
+            elif op == "3":
+                False
         elif op == "2":
             edtIstDelFornecedor("I")
+        elif op == "3":
+            return False
             
 def edtIstDelFuncionario(op):
     nome = ""
@@ -145,57 +157,69 @@ def menuFuncionarios():
             edtIstDelFuncionario("I")
             
 def edtIstDelProduto(op):
-    id_prod =""
+    idProd = ""
     nome = ""
-    preco_venda = ""
-    preco_compra = ""
-    qtd_estoque = ""
+    precoVenda = ""
+    precoCompra = ""
+    qtdEstoque = ""
+    if op == "A" or op == "D":
+        idProd = input("ID do produto: ")   
     if op == "A" or op == "I":
         nome = input("Nome: ")
-        preco_venda = input("Preço de Venda: ")
-        preco_compra = input("Preço de Compra: ")
-        qtd_estoque = input("Quantidade de Produtos: ")
-    prod = Produto(id_prod, nome, preco_venda, preco_compra, qtd_estoque)
+        precoVenda = input("Preço de Venda: ")
+        precoCompra = input("Preço de Compra: ")
+        qtdEstoque = input("Quantidade de Produtos: ")
+    prod = Produto(idProd, nome, precoVenda, precoCompra, qtdEstoque)
     prod.operacaoProduto(op)
     
 def menuProdutos():
     while not False:
-        print('''
-                 1 - Listar Produtos
-                 2 - Cadastrar Produtos
-                 3 - Relatórios ''')
+        print('''Menu de produtos: 
+                    1 - Listar Produtos
+                    2 - Cadastrar Produtos
+                    3 - Relatórios 
+                    4 - Voltar''')
         op = input("Opção: ")
-        if op != "1" and op != "2" and op != "3":
+        if op != "1" and op != "2" and op != "3" and op != "4":
             print("Opção inválida!")
         elif op == "1":
             prod = Produto()
             prod.listaProdutos()
             print('''
                      1 - Editar Produto
-                     2 - Excluir Produto''')
+                     2 - Excluir Produto 
+                     3 - Voltar''')
             op = input("Opção: ")
-            if op != "1" and op != "2":
+            if op != "1" and op != "2" and op != "3":
                 print("Opção inválida!")    
             elif op == "1":
                 print("Os Valores que não deseja editar, deixe vazio!")
                 edtIstDelProduto("A")
             elif op == "2":
                 edtIstDelProduto("D")
+            elif op == "3":
+                False
         elif op == "2":
             edtIstDelProduto("I")
         elif op =="3":
             prod = Produto()
-            print('''
+            print('''Relatórios:  
                     1 - Relatório de produtos mais vendidos
-                    2 - Relatório de produtos menos vendidos ''')
+                    2 - Relatório de produtos menos vendidos 
+                    3 - Voltar''')
             opRelatorio = input("Opção: ")
-            opLimite = input("Quantos produtos: ")
-            if opRelatorio != "1" and opRelatorio != "2":
+            if opRelatorio != "1" and opRelatorio != "2" and opRelatorio != "3":
                 print("Opção inválida!")
             elif opRelatorio == "1":
+                opLimite = input("Quantos produtos: ")
                 prod.relatProdutos(1, opLimite)
             elif opRelatorio == "2":
+                opLimite = input("Quantos produtos: ")
                 prod.relatProdutos(2, opLimite)
+            elif opRelatorio == "3":
+                False
+        elif op == "4":
+            return False
                 
 def IstCompra():
     id_entrada = ""
@@ -295,11 +319,7 @@ def menuVendas():
                 fim = input("Data do término(ano-mes-dia): ")
                 cpf_func = input("CPF do funcionário: ")
                 venda.relatoriosVendas(3, inicio, fim, cpf_func)
-                
-        
 
-
- 
 print("Bem vindo ao Akatsuki Vendas.")
 print("Por favor, efetue o login.")
 
@@ -307,27 +327,27 @@ print("Por favor, efetue o login.")
 usuario = menuLogin()
 print("Olá",usuario.nome,"Selecione a opção desejada: ") 
 '''
-
-print('''
-         1 - Clientes
-         2 - Fornecedores
-         3 - Funcionarios
-         4 - Produtos
-         5 - Compras
-         6 - Vendas''')
-opcao = input("Opção: ")
-
-if opcao == "1":
-    menuclientes()
-elif opcao == "2":
-    menuFornecedores()
-elif opcao == "3":
-    menuFuncionarios()
-elif opcao == "4":
-    menuProdutos()
-elif opcao == "5":
-    menuCompras()
-elif opcao == "6":
-    menuVendas()
-else:
-    print("Opção inválida!")
+while not False:
+    print('''Menu Inicial:
+             1 - Clientes
+             2 - Fornecedores
+             3 - Funcionarios
+             4 - Produtos 
+             5 - Compras 
+             6 - Vendas''')
+    opcao = input("Opção: ")
+    
+    if opcao == "1":
+        menuclientes()
+    elif opcao == "2":
+        menuFornecedores()
+    elif opcao == "3":
+        menuFuncionarios()
+    elif opcao == "4":
+        menuProdutos()
+    elif opcao == "5":
+        menuCompras()
+    elif opcao == "6":
+        menuVendas()
+    else:
+        print("Opção inválida!")

@@ -1,3 +1,4 @@
+import psycopg2
 from model import connection as conexao
 class Venda(object):
     '''
@@ -23,8 +24,9 @@ class Venda(object):
                                     VALUES(%s,%s,%s)''', procValores)
                 
             conexao.commit()
-        except (Exception, conexao.psycopg2.DatabaseError) as error:
-            conexao.rollback()
+            print("Operação concluida!")
+        except (Exception, psycopg2.DatabaseError) as error:
+            conexao.rollBack()
             print(error)
         finally:
             if conexao is not None:

@@ -21,9 +21,24 @@ class Produto(object):
     def validaProduto(self):
         self.validaPreco(self.preco_venda, self.preco_compra)
         self.validaQtdEstoque(self.qtd_estoque)
-            
+    
+    def dadosEdicaoProd(self, nome, preco_venda, preco_compra, qtd_estoque ):
+        if self.nome == "":
+            self.nome = nome
+        if self.preco_venda == "":
+            self.preco_venda = preco_venda
+        if self.preco_compra == "":
+            self.preco_compra = preco_compra
+        if self.qtd_estoque  == "":
+            self.qtd_estoque = qtd_estoque
+                
     def operacaoProduto(self, operacao):
-        self.mProduto.procIADProduto(self, operacao)
+        if operacao == "I":
+            self.mProduto.procIADProduto(self, operacao)
+        else:
+            dadosProd = self.mProduto.recuperaDados(self.id)
+            self.dadosEdicaoProd(*dadosProd)
+            self.mProduto.procIADProduto(self, operacao)
     
     def validaPrecos(self):
         if self.preco_venda < self.preco_compra:

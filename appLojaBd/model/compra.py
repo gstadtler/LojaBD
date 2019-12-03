@@ -1,3 +1,4 @@
+import psycopg2
 from model import connection as conexao
 class Compra(object):
     '''
@@ -22,8 +23,9 @@ class Compra(object):
                 conexao.execute('INSERT INTO compra_produto(id_produto_produto, id_entrada_compra, quantidade) VALUES(%s,%s,%s)', procValores)
                 
             conexao.commit()
-        except (Exception, conexao.psycopg2.DatabaseError) as error:
-            conexao.rollback()
+            print("Operação concluida!")
+        except (Exception, psycopg2.DatabaseError) as error:
+            conexao.rollBack()
             print(error)
         finally:
             if conexao is not None:

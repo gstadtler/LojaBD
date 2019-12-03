@@ -1,3 +1,4 @@
+import psycopg2
 from model import connection as conex
 import pandas as pd
 from tabulate import tabulate
@@ -20,9 +21,17 @@ class Cliente(object):
                        cliente.bairro, cliente.cidade)
         
         conexao = conex.Connection()
-        conexao.callProCedure("insere_atualiza_deleta_cliente" , procValores)
-        conexao.commit()
-        conexao.close()
+        
+        try:
+            conexao.callProCedure("insere_atualiza_deleta_cliente" , procValores)
+            conexao.commit()
+            print("Operação concluida!")
+        except (Exception, psycopg2.DatabaseError) as error:
+            conexao.rollBack()
+            print(error)
+        finally:
+            if conexao is not None:
+                conexao.close()
         
     def recuperaDados(self, cpf):
         param = (cpf,)
