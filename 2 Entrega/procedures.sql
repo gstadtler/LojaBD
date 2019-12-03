@@ -46,9 +46,7 @@ CREATE OR REPLACE FUNCTION insere_atualiza_deleta_funcionario(
 	RETURNS void AS $$
 BEGIN
     IF (vOPR = 'I') THEN
-      INSERT INTO funcionario(cpf,nome,email,senha,flag_gerente) VALUES (vCPF,vNome_funcionario,
-								  						  vEmail_funcionario,vSenha_funcionario,
-													      vFlag_gerente);
+      INSERT INTO funcionario(cpf,nome,email,senha,flaggerente) VALUES (vCPF,vNome_funcionario,vEmail_funcionario,vSenha_funcionario,vFlag_gerente);
 	  IF(vFlag_gerente = True) THEN
 	    INSERT INTO gerente VALUES (vCPF);
 	  ELSE IF(vFlag_gerente = False) THEN                                               
@@ -62,7 +60,7 @@ BEGIN
 
     ELSE IF(vOPR = 'A') THEN
       UPDATE funcionario SET nome = vNome_funcionario, email = vEmail_funcionario, 
-	  senha = vSenha_funcionario, flag_gerente = vFlag_gerente WHERE cpf = vCPF;
+	  senha = vSenha_funcionario, flaggerente = vFlag_gerente WHERE cpf = vCPF;
 	
     ELSE IF(vOPR = 'D')THEN
 	  IF(vFlag_gerente = True) THEN
