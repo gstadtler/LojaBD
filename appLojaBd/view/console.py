@@ -11,8 +11,11 @@ import getpass
 
 def menuLogin():
     while not False:
-        email = input("Email: ")
-        senha = getpass.getpass(prompt='Senha: ', stream=None) 
+        # descomentar após teste
+        # email = input("Email: ")
+        # senha = getpass.getpass(prompt='Senha: ', stream=None) 
+        email = "regis@funcionario.com"
+        senha = "4321regis"
         usuario = setUsuario(email, senha)
         if usuario != False:
             return usuario
@@ -133,28 +136,34 @@ def edtIstDelFuncionario(op):
     
 def menuFuncionarios():
     while not False:
-        print('''
-                 1 - Listar Funcionários
-                 2 - Cadastrar Funcionários''')
+        print('''Menu de Funcionarios: 
+                     1 - Listar Funcionários
+                     2 - Cadastrar Funcionários 
+                     3 - Voltar''')
         op = input("Opção: ")
-        if op != "1" and op != "2":
+        if op != "1" and op != "2" and op != "3":
             print("Opção inválida!")
         elif op == "1":
             func = Funcionario()
             func.listaFuncionarios()
             print('''
                      1 - Editar Funcionário
-                     2 - Excluir Funcionário''')
+                     2 - Excluir Funcionário 
+                     3 - Voltar''')
             op = input("Opção: ")
-            if op != "1" and op != "2":
+            if op != "1" and op != "2" and op != "3":
                 print("Opção inválida!")    
             elif op == "1":
                 print("Os Valores que não deseja editar, deixe vazio!")
                 edtIstDelFuncionario("A")
             elif op == "2":
                 edtIstDelFuncionario("D")
+            elif op == "3":
+                False
         elif op == "2":
             edtIstDelFuncionario("I")
+        elif op == "3":
+            return False
             
 def edtIstDelProduto(op):
     idProd = ""
@@ -322,11 +331,14 @@ def menuVendas():
 
 print("Bem vindo ao Akatsuki Vendas.")
 print("Por favor, efetue o login.")
+usuario = menuLogin()
+print("Olá",usuario.nome,"Selecione a opção desejada: ") 
 
 ''' Descomentar Após testes!
 usuario = menuLogin()
 print("Olá",usuario.nome,"Selecione a opção desejada: ") 
 '''
+
 while not False:
     print('''Menu Inicial:
              1 - Clientes
@@ -342,7 +354,11 @@ while not False:
     elif opcao == "2":
         menuFornecedores()
     elif opcao == "3":
-        menuFuncionarios()
+        if usuario.validaCargo() == True:
+            menuFuncionarios()
+        else:
+            print("Opção disponivel apenas para gerentes!")
+            False
     elif opcao == "4":
         menuProdutos()
     elif opcao == "5":

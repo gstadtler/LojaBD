@@ -29,7 +29,7 @@ class Funcionario(object):
             return False
         
     def validaCargo(self):
-        return self.mFuncionario.verificaGerente(self.cpf)
+        return self.mFuncionario.verificaGerente(str(self.cpf))
          
     def validaSenha(self):
         if (self.senha == ""):
