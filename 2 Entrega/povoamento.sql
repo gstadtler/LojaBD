@@ -398,12 +398,14 @@ INSERT INTO funcionario (
     cpf,
     nome,
     email,
-    senha
+    senha,
+    flagGerente
 ) VALUES (
     70060134020,
     'Guilherme',
     'guilherme@funcionario.com',
     '4321guilherme'
+    false
 );
 
 INSERT INTO funcionario (
@@ -411,7 +413,7 @@ INSERT INTO funcionario (
     nome,
     email,
     senha,
-    taggerente
+    flagGerente
 ) VALUES (
     09601450321,
     'Fernando',
@@ -425,7 +427,7 @@ INSERT INTO funcionario (
     nome,
     email,
     senha,
-    taggerente
+    flagGerente
 ) VALUES (
     12304136792,
     'Gustavo',
@@ -439,7 +441,7 @@ INSERT INTO funcionario (
     nome,
     email,
     senha,
-    taggerente
+    flagGerente
 ) VALUES (
     49709849050,
     'Regis',
