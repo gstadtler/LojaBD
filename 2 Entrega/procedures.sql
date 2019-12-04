@@ -116,8 +116,8 @@ CREATE OR REPLACE FUNCTION insere_atualiza_deleta_produto(
     IN vOPR CHAR,
 	IN vId_produto INTEGER,
     IN vNome VARCHAR(50),
-    IN vPreco_venda INTEGER,
-	IN vPreco_compra INTEGER,
+    IN vPreco_venda NUMERIC,
+	IN vPreco_compra NUMERIC,
 	IN vQtd_estoque INTEGER)
 	RETURNS void AS $$
 BEGIN   
