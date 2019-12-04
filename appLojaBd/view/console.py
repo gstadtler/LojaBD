@@ -12,7 +12,6 @@ from controller.venda import Venda
 import getpass
 from controller.vendedor import Vendedor
 from controller.gerente import Gerente
-#from aifc import data
 
 def limparTerminal():
     os.system('cls' if os.name == 'nt' else 'clear')
