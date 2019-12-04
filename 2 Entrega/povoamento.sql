@@ -229,7 +229,7 @@ INSERT INTO fornecedor (
     bairro,
     cidade
 ) VALUES (
-    668938683000130,
+    68938683000130,
     'Gamers Informatica',
     'gamers@informatica.com',
     '100',
@@ -247,7 +247,7 @@ INSERT INTO fornecedor (
     bairro,
     cidade
 ) VALUES (
-    653978695000180,
+    65397869500018,
     'Shippuden Info',
     'shippuden@informatica.com',
     'Rua Kakashi',
@@ -269,7 +269,7 @@ INSERT INTO telefone_fornecedor (
     cnpj_fornecedor,
     telefone
 ) VALUES (
-    668938683000130,
+    68938683000130,
     33456806
 );
 
@@ -277,7 +277,7 @@ INSERT INTO telefone_fornecedor (
     cnpj_fornecedor,
     telefone
 ) VALUES (
-    653978695000180,
+    65397869500018,
     32446786
 );
 
@@ -313,7 +313,7 @@ INSERT INTO compra_entrada (
     valor_total
 ) VALUES (
     3,
-    668938683000130,
+    68938683000130,
     DATE '2019-09-12',
     100000
 );
@@ -325,7 +325,7 @@ INSERT INTO compra_entrada (
     valor_total
 ) VALUES (
     4,
-    653978695000180,
+    65397869500018,
     DATE '2019-05-09',
     200000
 );
@@ -337,7 +337,7 @@ INSERT INTO compra_entrada (
     valor_total
 ) VALUES (
     5,
-    653978695000180,
+    65397869500018,
     DATE '2019-10-08',
     770000
 );

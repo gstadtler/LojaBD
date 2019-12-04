@@ -10,8 +10,8 @@ def validaNome(nome):
     elif nome.isalpha() == False:
         print("Nome só pode conter letras!")
         return False  
-    elif len(nome) > 20:
-        print("Nome possui mais de 20 caracteres!")
+    elif len(nome) > 50:
+        print("Nome possui mais de 50 caracteres!")
         return False
         
 def validaEmail(email):

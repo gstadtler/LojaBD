@@ -31,14 +31,19 @@ class Fornecedor(object):
             self.cidade = cidade
                
     def validaFornecedor(self):
-        validaCnpj(self.cnpj)
-        validaNome(self.nome)
-        validaEmail(self.email)
+        if validaCnpj(self.cnpj) == False:
+            return False
+        if validaNome(self.nome) == False:
+            return False
+        if validaEmail(self.email) == False:
+            return False
     
     def operacaoFornecedor(self, operacao):
         if operacao == "I":
             if self.validaFornecedor() == False:
                 return False
+            else:
+                self.mFornecedor.procIADFornecedor(self, operacao)
         else:
             dadosForn = self.mFornecedor.recuperaDados(self.cnpj)
             self.dadosEdicaoForn(*dadosForn)

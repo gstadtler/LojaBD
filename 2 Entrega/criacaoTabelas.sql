@@ -26,7 +26,7 @@ DROP TABLE cliente;
 
 CREATE TABLE funcionario (
     cpf     BIGINT,
-    nome    VARCHAR(20),
+    nome    VARCHAR(50),
     email   VARCHAR(30),
     senha   VARCHAR(50),
 	flagGerente BOOL,
@@ -57,7 +57,7 @@ CREATE TABLE supervisiona (
 
 CREATE TABLE fornecedor (
     cnpj     BIGINT,
-    nome     VARCHAR(20),
+    nome     VARCHAR(50),
     email    VARCHAR(30),
     rua      VARCHAR(50),
     numero   INTEGER,
@@ -75,7 +75,7 @@ CREATE TABLE telefone_fornecedor (
 
 CREATE TABLE produto (
     id_produto     SERIAL,
-    nome           VARCHAR(20),
+    nome           VARCHAR(50),
     preco_venda    NUMERIC,
     preco_compra   NUMERIC,
     qtd_estoque    INTEGER,
@@ -102,7 +102,7 @@ CREATE TABLE compra_produto (
 
 CREATE TABLE cliente (
     cpf              BIGINT,
-    nome_cliente     VARCHAR(20),
+    nome_cliente     VARCHAR(50),
     email_cliente    VARCHAR(20),
     rua_cliente      VARCHAR(50),
     numero_cliente   INTEGER,

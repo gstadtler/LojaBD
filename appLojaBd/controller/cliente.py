@@ -45,6 +45,8 @@ class Cliente(object):
         if operacao == "I":
             if self.validaCliente() == False:
                 return False
+            else:
+                self.mCliente.procIADCliente(self, operacao)
         else:
             dadosCli = self.mCliente.recuperaDados(self.cpf)
             self.dadosEdicaoCli(*dadosCli)

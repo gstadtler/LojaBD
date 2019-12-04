@@ -28,16 +28,16 @@ def menuLogin():
     elif op == "1":
         while not False:
             # descomentar após teste
-            #email = input("Email: ")
-            #senha = getpass.getpass(prompt='Senha: ', stream=None) 
+            email = input("Email: ")
+            senha = getpass.getpass(prompt='Senha: ', stream=None) 
             
             #gerente
             #email = "regis@funcionario.com"
             #senha = "4321regis"
             
             #vendedor
-            email = "gustavo@funcionario.com"
-            senha = "4321gustavo"
+            #email = "gustavo@funcionario.com"
+            #senha = "4321gustavo"
             usuario = setUsuario(email, senha)
             if usuario != False:
                 return usuario
@@ -234,11 +234,10 @@ def menuProdutos():
     while not False:
         print('''Menu de produtos: 
                     1 - Listar Produtos
-                    2 - Cadastrar Produtos
-                    3 - Relatórios 
-                    4 - Voltar''')
+                    2 - Relatórios
+                    3 - Voltar ''')
         op = input("Opção: ")
-        if op != "1" and op != "2" and op != "3" and op != "4":
+        if op != "1" and op != "2" and op != "3":
             print("Opção inválida!")
             False
         elif op == "1":
@@ -258,9 +257,7 @@ def menuProdutos():
                 edtIstDelProduto("D")
             elif op == "3":
                 False
-        elif op == "2":
-            edtIstDelProduto("I")
-        elif op =="3":
+        elif op =="2":
             prod = Produto()
             print('''Relatórios:  
                     1 - Relatório de produtos mais vendidos
@@ -277,7 +274,7 @@ def menuProdutos():
                 prod.relatProdutos(2, opLimite)
             elif opRelatorio == "3":
                 False
-        elif op == "4":
+        elif op == "3":
             return False
                 
 def IstCompra():
