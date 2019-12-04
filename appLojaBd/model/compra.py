@@ -27,7 +27,7 @@ class Compra(object):
         try:                    
             procValores = None
             for produto in compra.produtosCompra:
-                procValores = (produto.id, compra.idEntrada, produto.qtd_estoque)
+                procValores = (produto.id, compra.idEntrada, produto.quantidade)
                 self.conexCompra.execute('INSERT INTO compra_produto(id_produto_produto, id_entrada_compra, quantidade) VALUES(%s,%s,%s)', procValores)
                 
             self.conexCompra.commit()
