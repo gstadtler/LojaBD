@@ -6,11 +6,11 @@ DECLARE
 BEGIN
     SELECT p.qtd_estoque INTO n
     FROM produto p
-    WHERE p.id_produto = old.id_produto_produto;
+    WHERE p.id_produto = new.id_produto_produto;
     
     UPDATE produto
     SET qtd_estoque = n - new.quantidade
-    WHERE id_produto = old.id_produto_produto;
+    WHERE id_produto = new.id_produto_produto;
     
     RETURN new;
 END;
@@ -24,11 +24,11 @@ DECLARE
 BEGIN
     SELECT p.qtd_estoque INTO n
     FROM produto p
-    WHERE p.id_produto = old.id_produto_produto;
+    WHERE p.id_produto = new.id_produto_produto;
 	
     UPDATE produto
     SET qtd_estoque = n + new.quantidade
-    WHERE id_produto = old.id_produto_produto;
+    WHERE id_produto = new.id_produto_produto;
     
     RETURN new;
 END;
