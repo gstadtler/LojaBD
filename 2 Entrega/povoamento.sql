@@ -410,36 +410,42 @@ INSERT INTO funcionario (
     cpf,
     nome,
     email,
-    senha
+    senha,
+    taggerente
 ) VALUES (
     09601450321,
     'Fernando',
     'fernando@funcionario.com',
-    '4321fernando'
+    '4321fernando',
+    false
 );
 
 INSERT INTO funcionario (
     cpf,
     nome,
     email,
-    senha
+    senha,
+    taggerente
 ) VALUES (
     12304136792,
     'Gustavo',
     'gustavo@funcionario.com',
-    '4321gustavo'
+    '4321gustavo',
+    false
 );
 
 INSERT INTO funcionario (
     cpf,
     nome,
     email,
-    senha
+    senha,
+    taggerente
 ) VALUES (
     49709849050,
     'Regis',
     'regis@funcionario.com',
-    '4321regis'
+    '4321regis',
+    true
 );
 
 -- INSERINDO GERENTES
