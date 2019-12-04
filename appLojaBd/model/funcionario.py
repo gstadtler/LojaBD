@@ -16,8 +16,8 @@ class Funcionario(object):
         Constructor
         '''
     
-    def procIADFuncionario(self, funcionario, operacao):
-        procValores = (operacao, funcionario.cpf, funcionario.nome, 
+    def procIADFuncionario(self, funcionario, operacao, cpfGerente):
+        procValores = (operacao, cpfGerente, funcionario.cpf, funcionario.nome, 
                        funcionario.email, funcionario.senha, funcionario.flagGerente)
         
         conexao = conex.Connection()
@@ -46,6 +46,14 @@ class Funcionario(object):
         conexao = conex.Connection()
         param = (cpf,)
         conexao.execute('SELECT cpf FROM funcionario WHERE cpf = %s', param)
+        ret = conexao.cur.fetchone()
+        conexao.close()
+        return ret
+    
+    def recuperaDados(self, cpf):
+        conexao = conex.Connection()
+        param = (cpf,)
+        conexao.execute('SELECT nome, email, senha, flaggerente FROM funcionario WHERE cpf = %s', param)
         ret = conexao.cur.fetchone()
         conexao.close()
         return ret
