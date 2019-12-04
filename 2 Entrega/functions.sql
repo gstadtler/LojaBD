@@ -24,7 +24,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION insere_venda (IN cpf_funcionario BIGINT, IN cpf_cliente BIGINT, IN data_venda DATE, IN total INTEGER)
+CREATE OR REPLACE FUNCTION insere_venda (IN cpf_funcionario BIGINT, IN cpf_cliente BIGINT, IN data_venda DATE, IN total NUMERIC)
 	RETURNS INTEGER AS $$
 DECLARE
 	lastIDsaida INTEGER;
@@ -37,7 +37,7 @@ BEGIN
 END; 
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION insere_compra (IN cnpj_fornecedor BIGINT, IN data_compra DATE, IN total INTEGER)
+CREATE OR REPLACE FUNCTION insere_compra (IN cnpj_fornecedor BIGINT, IN data_compra DATE, IN total NUMERIC)
 	RETURNS INTEGER AS $$
 DECLARE
 	lastIdEntrada INTEGER;
