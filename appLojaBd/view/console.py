@@ -1,5 +1,4 @@
 import os
-import sys
 import time
 from datetime import datetime
 from controller.sessao import setUsuario
@@ -18,31 +17,21 @@ def limparTerminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def menuLogin():
-    print('''
-    1 - Efetuar Login  
-    2 - Fechar Programa ''')
-    op = input("Operação: ")
-    if op != "1" and op != "2":
-        print("Operação inválida!")
-        return False
-    elif op == "1":
-        while not False:
-            # descomentar após teste
-            email = input("Email: ")
-            senha = getpass.getpass(prompt='Senha: ', stream=None) 
-            
-            #gerente
-            #email = "regis@funcionario.com"
-            #senha = "4321regis"
-            
-            #vendedor
-            #email = "gustavo@funcionario.com"
-            #senha = "4321gustavo"
-            usuario = setUsuario(email, senha)
-            if usuario != False:
-                return usuario
-    elif op == "2":
-        sys.exit()
+    while not False:
+        # descomentar após teste
+        # email = input("Email: ")
+        # senha = getpass.getpass(prompt='Senha: ', stream=None) 
+        
+        #gerente
+        #email = "regis@funcionario.com"
+        #senha = "4321regis"
+        
+        #vendedor
+        email = "gustavo@funcionario.com"
+        senha = "4321gustavo"
+        usuario = setUsuario(email, senha)
+        if usuario != False:
+            return usuario
         
 def edtIstDelCliente(op):
     nome = ""
@@ -80,8 +69,7 @@ def menuclientes():
                      3 - Voltar''')
             op = input("Opção: ")
             if op != "1" and op != "2" and op != "3":
-                print("Opção inválida!")
-                False   
+                print("Opção inválida!")    
             elif op == "1":
                 print("Os Valores que não deseja editar, deixe vazio!")
                 edtIstDelCliente("A")
@@ -131,8 +119,7 @@ def menuFornecedores():
                      3 - Voltar''')
             op = input("Opção: ")
             if op != "1" and op != "2" and op != "3":
-                print("Opção inválida!")
-                False    
+                print("Opção inválida!")    
             elif op == "1":
                 print("Os Valores que não deseja editar, deixe vazio!")
                 edtIstDelFornecedor("A")
@@ -150,18 +137,16 @@ def edtIstDelFuncionario(op):
     email = ""
     senha = ""
     flagGerente = False
-    cpfGerente = usuario.cpf
     cpf = input("CPF: ")
     if op == "A" or op == "I":
         nome = input("Nome: ")
         email = input("E-Mail: ")
         senha = input("Senha: ")
-        flagGerente = input("O funcionário é um gerente? (s/n) ")
-        flagGerente = flagGerente.lower()
-        if flagGerente == "s":
+        flagGerente = input("O funcionário é um gerente? S/N")
+        if flagGerente == "S":
             flagGerente = True
     func = Funcionario(cpf, nome, email, senha, flagGerente)
-    func.operacaoFuncionario(op, cpfGerente)
+    func.operacaoFuncionario(op)
     
 def menuFuncionarios():
     while not False:
@@ -172,42 +157,22 @@ def menuFuncionarios():
         op = input("Opção: ")
         if op != "1" and op != "2" and op != "3":
             print("Opção inválida!")
-            False
         elif op == "1":
             func = Funcionario()
             func.listaFuncionarios()
             print('''
                      1 - Editar Funcionário
-                     2 - Ver Meta do Funcionario
-                     3 - Excluir Funcionário 
-                     4 - Voltar''')
+                     2 - Excluir Funcionário 
+                     3 - Voltar''')
             op = input("Opção: ")
-            if op != "1" and op != "2" and op != "3" and op != "4":
-                print("Opção inválida!")
-                False   
+            if op != "1" and op != "2" and op != "3":
+                print("Opção inválida!")    
             elif op == "1":
                 print("Os Valores que não deseja editar, deixe vazio!")
                 edtIstDelFuncionario("A")
             elif op == "2":
-                vCpf = input("CPF: ")
-                vend = Vendedor(vCpf,"","","",False, 0)
-                vend.exibeMeta()
-                print('''
-                     1 - Editar Meta
-                     2 - Voltar''')
-                op = input("Opção: ")
-                if op != "1" and op != "2":
-                    print("Opção inválida!")
-                    False
-                elif op == "1":
-                    vMeta = input("Meta: ")
-                    vend.meta = vMeta
-                    vend.editaMeta()
-                elif op == "2":
-                    False
-            elif op == "3":
                 edtIstDelFuncionario("D")
-            elif op == "4":
+            elif op == "3":
                 False
         elif op == "2":
             edtIstDelFuncionario("I")
@@ -240,7 +205,6 @@ def menuProdutos():
         op = input("Opção: ")
         if op != "1" and op != "2" and op != "3" and op != "4":
             print("Opção inválida!")
-            False
         elif op == "1":
             prod = Produto()
             prod.listaProdutos()
@@ -367,8 +331,7 @@ def menuVendas():
                      2 - Voltar''')
             op = input("Opção: ")
             if op != "1" and op != "2":
-                print("Opção inválida!")
-                False    
+                print("Opção inválida!")    
             elif op == "1":
                 idVenda = input("ID da venda: ")
                 venda.listaVendaProdutos(idVenda)
@@ -407,7 +370,6 @@ def menuVendas():
                                 venda.addProduto(produto)
                                 valida = False
                         sair = input("Deseja inserir outro? (s/n) ")
-                        sair = sair.lower()
                         if sair == "s":
                             lacoProd = True
                         else:
@@ -430,7 +392,6 @@ def menuVendas():
             opRelatorio = input("Opção: ")
             if opRelatorio != "1" and opRelatorio != "2" and opRelatorio != "3" and opRelatorio != "4":
                 print("Opção inválida!")
-                False
             
             inicio = input("Data de início(ano-mes-dia): ")
             fim = input("Data do término(ano-mes-dia): ")   
@@ -488,51 +449,52 @@ def menuSupervisionamento(tagGerente):
             vend.verificaMeta(mes, ano)
         elif op == "3":
             return False
- 
-while not False:           
-    print("Bem vindo ao Akatsuki Vendas.")
-    print("Por favor, selecione a opção desejada.")
-    usuario = menuLogin()
-    if usuario != False:
-        print("Olá",usuario.nome,"Selecione a opção desejada: ") 
-        logado = True
-    else:
-        logado = False
-    while logado == True:
-        print('''Menu Inicial:
-                 1 - Clientes
-                 2 - Fornecedores
-                 3 - Funcionarios
-                 4 - Produtos 
-                 5 - Compras 
-                 6 - Vendas
-                 7 - Supervisionamento
-                 8 - Sair ''')
-        opcao = input("Opção: ")
-        
-        if opcao == "1":
-            menuclientes()
-        elif opcao == "2":
-            menuFornecedores()
-        elif opcao == "3":
-            if usuario.validaCargo() == True:
-                menuFuncionarios()
-            else:
-                print("Opção disponivel apenas para gerentes!")
-                False
-        elif opcao == "4":
-            menuProdutos()
-        elif opcao == "5":
-            menuCompras()
-        elif opcao == "6":
-            menuVendas()
-        elif opcao == "7":
-            if usuario.validaCargo() == True:
-                menuSupervisionamento(True)
-            else:
-                menuSupervisionamento(False)
-        elif opcao == "8":
-            usuario = None
-            logado = False
+            
+print("Bem vindo ao Akatsuki Vendas.")
+print("Por favor, efetue o login.")
+usuario = menuLogin()
+print("Olá",usuario.nome,"Selecione a opção desejada: ") 
+
+''' Descomentar Após testes!
+usuario = menuLogin()
+print("Olá",usuario.nome,"Selecione a opção desejada: ") 
+'''
+
+while not False:
+    print('''Menu Inicial:
+             1 - Clientes
+             2 - Fornecedores
+             3 - Funcionarios
+             4 - Produtos 
+             5 - Compras 
+             6 - Vendas
+             7 - Supervisionamento
+             8 - Sair ''')
+    opcao = input("Opção: ")
+    
+    if opcao == "1":
+        menuclientes()
+    elif opcao == "2":
+        menuFornecedores()
+    elif opcao == "3":
+        if usuario.validaCargo() == True:
+            menuFuncionarios()
         else:
-            print("Opção inválida!")
+            print("Opção disponivel apenas para gerentes!")
+            False
+    elif opcao == "4":
+        menuProdutos()
+    elif opcao == "5":
+        menuCompras()
+    elif opcao == "6":
+        menuVendas()
+    elif opcao == "7":
+        if usuario.validaCargo() == True:
+            menuSupervisionamento(True)
+        else:
+            menuSupervisionamento(False)
+    elif opcao == "8":
+        usuario = None
+        break
+    else:
+        print("Opção inválida!")

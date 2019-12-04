@@ -12,7 +12,7 @@ class Vendedor(func.Funcionario):
         '''
         Constructor
         '''
-        self.meta = meta
+        self.meta = 0
         self.mVendedor = modelVendedor()
         self.cpfGerente = cpfGerente
         
@@ -48,28 +48,10 @@ class Vendedor(func.Funcionario):
             print("Você não tem permissão para efetuar essa operação!")
             return False
     
-    def verificaMeta(self, mes, ano):
+    def verificaMeta(self,mes,ano):
         parametros = (self.cpf, mes, ano)
         ret = self.mVendedor.verificaMeta(parametros)
         print(ret[0])
-
-    def dadosEdicaoVend(self, nome, email, senha, flagGerente):
-        if self.nome == "":
-            self.nome = nome
-        if self.email == "":
-            self.email = email
-        if self.senha == "":
-            self.senha = senha
-        if self.flagGerente  == "":
-            self.flagGerente = flagGerente
-             
-    def editaMeta(self):
-        dadosFunc = self.mFuncionario.recuperaDados(self.cpf)
-        self.dadosEdicaoVend(*dadosFunc)
-        self.mVendedor.editarMeta(self.meta, self.cpf)
-    
-    def exibeMeta(self):
-        self.mVendedor.retornaMeta(self.cpf)
         
     def verificaSupervisor(self):
         self.mVendedor.verificaSupervisor(self.cpf)

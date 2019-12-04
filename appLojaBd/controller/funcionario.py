@@ -38,25 +38,9 @@ class Funcionario(object):
         elif (len(self.senha) > 50):
             print("Senha possui mais de 50 caracteres!")
             return False
-        
-    def dadosEdicaoFunc(self, nome, email, senha, flagGerente):
-        if self.nome == "":
-            self.nome = nome
-        if self.email == "":
-            self.email = email
-        if self.senha == "":
-            self.senha = senha
-        if self.flagGerente  == "":
-            self.flagGerente = flagGerente
-        
-    def operacaoFuncionario(self, operacao, cpfGerente):
-        if operacao == "I":
-            if self.validaFuncionario() == False:
-                return False
-        else:
-            dadosFunc = self.mFuncionario.recuperaDados(self.cpf)
-            self.dadosEdicaoFunc(*dadosFunc)
-            self.mFuncionario.procIADFuncionario(self, operacao, cpfGerente)
+            
+    def operacaoFuncionario(self, operacao):
+        self.mFuncionario.procIADFuncionario(self, operacao)
 
     def listaFuncionarios(self):
         self.mFuncionario.retornaFuncionarios()

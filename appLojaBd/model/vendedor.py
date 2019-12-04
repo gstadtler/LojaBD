@@ -1,4 +1,3 @@
-import psycopg2
 from model import connection as conex
 from tabulate import tabulate
 import pandas as pd
@@ -34,38 +33,10 @@ class Vendedor(object):
         print('')
         print(tabulate(data, showindex=False, headers=data.columns, numalign="left"))
         conexao.close()
-        
-    def editarMeta(self, meta, cpfVendedor):
-        try:
-            conexao = conex.Connection()
-            param = (meta, cpfVendedor)
-            conexao.execute('UPDATE vendedor SET meta = %s WHERE cpf = %s ', param)
-            conexao.commit()
-            print("Operação concluida!")
-        except (Exception, psycopg2.DatabaseError) as error:
-            conexao.rollBack()
-            print(error)
-        finally:
-            if conexao is not None:
-                conexao.close()
     
     def retornaVendedores(self):
         conexao = conex.Connection()
         print('')
         conexao.query('SELECT * FROM vendedor')
         conexao.queryResult()
-        conexao.close()
-        
-    def retornaMeta(self, cpfVendedor):
-        conexao = conex.Connection()
-        print('')
-        
-        data = pd.read_sql('''SELECT v.cpf, f.nome, CAST(v.meta AS MONEY) FROM vendedor v
-                              INNER JOIN funcionario f ON f.cpf = v.cpf
-                              WHERE v.cpf = %(cpfVendedor)s;''', conexao.conn, 
-                            params={"cpfVendedor":cpfVendedor})        
-        data = data.rename({"cpf":"CPF", "nome":"Nome", "meta":"Meta"}, axis='columns')
-        
-        print('')
-        print(tabulate(data, showindex=False, headers=data.columns, numalign="left"))
         conexao.close()
