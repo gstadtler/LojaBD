@@ -7,15 +7,10 @@ BEGIN
     SELECT p.qtd_estoque INTO n
     FROM produto p
     WHERE p.id_produto = old.id_produto_produto;
-
-    IF n > 0 THEN
-        UPDATE produto
-        SET qtd_estoque = n - new.quantidade
-        WHERE id_produto = old.id_produto_produto;
-    ELSE
-        Raise debug 'INSERÇÃO DE REGISTRO CANCELADA, ESTOQUE ZERADO % ', aVariable;
-        ROLLBACK;
-    END IF;
+    
+    UPDATE produto
+    SET qtd_estoque = n - new.quantidade
+    WHERE id_produto = old.id_produto_produto;
 END;
 $$ LANGUAGE plpgsql;
 
