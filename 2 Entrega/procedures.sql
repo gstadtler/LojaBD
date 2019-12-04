@@ -38,6 +38,7 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION insere_atualiza_deleta_funcionario(
     IN vOPR CHAR,
+	IN vCPFGerente BIGINT,
 	IN vCPF BIGINT,
     IN vNome_funcionario VARCHAR(50),
     IN vEmail_funcionario VARCHAR(20),
@@ -50,11 +51,7 @@ BEGIN
 	  IF(vFlag_gerente = True) THEN
 	    INSERT INTO gerente VALUES (vCPF);
 	  ELSE IF(vFlag_gerente = False) THEN                                               
-	    INSERT INTO vendedor VALUES (vCPF,49709849050,10);
-	  COMMIT;
-	  ELSE
-	    RAISE EXCEPTION 'Ocorreu algum problema...';
-		ROLLBACK;
+	    INSERT INTO vendedor VALUES (vCPF,vCPFGerente,30000);
 	  END IF;
 	  END IF;
 
@@ -69,17 +66,11 @@ BEGIN
 	  ELSE IF(vFlag_gerente = False) THEN
 	    DELETE FROM vendedor WHERE cpf = vCPF;
 		DELETE FROM funcionario WHERE cpf = vCPF;
-	  COMMIT;
-	  ELSE
-	    RAISE EXCEPTION 'Ocorreu algum problema...';
-		ROLLBACK;
 	  END IF;
 	  END IF;
-	ELSE
-	  RAISE EXCEPTION 'Atenção! Operação diferente de I, A ou D.';
-  END IF;
-  END IF;
-  END IF;
+  	END IF;
+  	END IF;
+  	END IF;
 END;
 $$ LANGUAGE plpgsql;
 
