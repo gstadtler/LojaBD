@@ -44,7 +44,8 @@ class Funcionario(object):
     
     def verificaFuncionario(self, cpf):
         conexao = conex.Connection()
-        conexao.execute('SELECT cpf FROM funcionario WHERE cpf = %s', (cpf))
+        param = (cpf,)
+        conexao.execute('SELECT cpf FROM funcionario WHERE cpf = %s', param)
         ret = conexao.cur.fetchone()
         conexao.close()
         return ret

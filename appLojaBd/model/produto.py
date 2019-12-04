@@ -49,6 +49,15 @@ class Produto(object):
         conexao.close()
         return ret
     
+    def recuperaProduto(self, idProduto):
+        param = (idProduto,)
+        conexao = conex.Connection()
+        conexao.execute( '''SELECT id_produto, nome, preco_venda, preco_compra, qtd_estoque 
+                            FROM produto WHERE id_produto = %s ''' , param)
+        ret = conexao.cur.fetchone()
+        conexao.close()
+        return ret
+    
     def retornaProdutos(self):
         conexao = conex.Connection()
         print("")

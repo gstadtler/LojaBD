@@ -46,13 +46,27 @@ class Produto(object):
             return False
 
     def validaQtdEstoque(self):
-        if self.qtd_estoque < 0:
+        estoque = int(self.qtd_estoque)
+        if estoque < 0:
             print("Quantidade de produtos inválida!")
             return False
+        else:
+            return True
+        
+    def validaQtdEstoqueVenda(self):
+        estoque = int(self.qtd_estoque)
+        if self.quantidade > estoque:
+            print("Quantidade de produtos inválida!")
+            return False
+        else:
+            return True
     
     def listaProdutos(self):
         self.mProduto.retornaProdutos()
         
+    def buscaProduto(self, idProduto):
+        return self.mProduto.recuperaProduto(idProduto)
+    
     def relatProdutos(self, op, limite):
         if op == 1:
             params = ("DESC", limite)

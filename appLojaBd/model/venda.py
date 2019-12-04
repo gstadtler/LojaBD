@@ -1,5 +1,10 @@
 import psycopg2
-from model import connection as conexao
+from model import connection as conex
+import pandas as pd
+from tabulate import tabulate
+pd.set_option('display.max_columns', 20)
+pd.set_option('display.width', 1000)
+
 class Venda(object):
     '''
     classdocs
@@ -13,8 +18,8 @@ class Venda(object):
     def insereVenda(self, venda):
         try:        
             procValores = (venda.cpfFuncionario, venda.cpfCliente, venda.dataVenda, venda.valorTotal)
-            conexao = conexao.Connection()
-            conexao.callProCedure(self, "insere_venda" , procValores)
+            conexao = conex.Connection()
+            conexao.callProCedure("insere_venda" , procValores)
             codVenda = conexao.cur.fetchone()
             
             procValores = None
@@ -33,38 +38,79 @@ class Venda(object):
                 conexao.close()
                 
     def retornaVendas(self):
-        conexao = conexao.Connection()
+        conexao = conex.Connection()
+        print('2')
+        data = pd.read_sql('SELECT * FROM venda', conexao.conn)        
+        data = data.rename({"id_saida":"ID","cpf_funcionario_venda":"CPF Funcionario",
+                            "cpf_cliente_venda":"CPF Cliente", "data_venda":"Data", 
+                            "valor_total":"Total"}, axis='columns')
+        
         print('')
-        conexao.query('SELECT * FROM venda')
-        conexao.queryResult()
+        print(tabulate(data, showindex=False, headers=data.columns, numalign="left"))
         conexao.close()
+        
+    def retornaVendaProdutos(self, idVenda):
+        conexao = conex.Connection()
+        print('')
+        data = pd.read_sql('''SELECT p.nome, vp.quantidade, (vp.quantidade * p.preco_venda) as total 
+                              FROM venda_produto vp  
+                              INNER JOIN produto p ON p.id_produto = vp.id_produto_produto 
+                              WHERE vp.id_saida_venda = '''+idVenda+" ", conexao.conn)        
+        data = data.rename({"nome":"NOME","quantidade":"Quantidade",
+                            "total":"Total"}, axis='columns')
+        
+        print('')
+        print(tabulate(data, showindex=False, headers=data.columns, numalign="left"))
+        conexao.close()     
             
     def relatVendasPeriodo(self, dataInicial, dataFinal):
-        conexao = conexao.Connection()
-        params = (dataInicial, dataFinal)
-        conexao.execute('''SELECT * FROM venda 
-                            WHERE data_venda BETWEEN %s 
-                            AND %s ''', params)
-        conexao.queryResult()
+        conexao = conex.Connection()
+        print('')
+        
+        data = pd.read_sql('''SELECT * FROM venda 
+                              WHERE data_venda BETWEEN %(dinicio)s AND %(dfin)s ''', conexao.conn, 
+                            params={"dinicio":pd.to_datetime(dataInicial, format='%Y-%m-%d'), 
+                                    "dfin":pd.to_datetime(dataFinal, format='%Y-%m-%d')})        
+        data = data.rename({"id_saida":"ID","cpf_funcionario_venda":"CPF Funcionario",
+                            "cpf_cliente_venda":"CPF Cliente", "data_venda":"Data", 
+                            "valor_total":"Total"}, axis='columns')
+        
+        print('')
+        print(tabulate(data, showindex=False, headers=data.columns, numalign="left"))
         conexao.close()
-    
+            
     def relatVendasFuncionarioPeriodo(self, dataInicial, dataFinal, cpfFuncionario):
-        conexao = conexao.Connection()
-        params = (dataInicial, dataFinal, cpfFuncionario)
-        conexao.execute('''SELECT * FROM venda 
-                            WHERE data_venda BETWEEN %s 
-                            AND %s 
-                            AND cpf_funcionario_venda = %s''', params)
-        conexao.queryResult()
+        conexao = conex.Connection()
+        print('')
+        
+        data = pd.read_sql('''SELECT * FROM venda 
+                              WHERE data_venda BETWEEN %(dinicio)s AND %(dfin)s 
+                              AND cpf_funcionario_venda = %(cpfFunc)s ''', conexao.conn, 
+                            params={"dinicio":pd.to_datetime(dataInicial, format='%Y-%m-%d'), 
+                                    "dfin":pd.to_datetime(dataFinal, format='%Y-%m-%d'), 
+                                    "cpfFunc":cpfFuncionario})        
+        data = data.rename({"id_saida":"ID","cpf_funcionario_venda":"CPF Funcionario",
+                            "cpf_cliente_venda":"CPF Cliente", "data_venda":"Data", 
+                            "valor_total":"Total"}, axis='columns')
+        
+        print('')
+        print(tabulate(data, showindex=False, headers=data.columns, numalign="left"))
         conexao.close()
 
     def relTotVendasFuncionarioPeriodo(self, dataInicial, dataFinal, cpfFuncionario):
-        conexao = conexao.Connection()
-        params = (dataInicial, dataFinal, cpfFuncionario)
-        conexao.execute('''SELECT SUM(valor_total) AS TOTAL FROM venda 
-                            WHERE data_venda BETWEEN %s 
-                            AND %s 
-                            AND cpf_funcionario_venda= %s
-                            GROUP BY cpf_funcionario_venda''', params)
-        conexao.queryResult()
+        conexao = conex.Connection()
+        print('')
+        
+        data = pd.read_sql('''SELECT f.nome, SUM(v.valor_total) AS total FROM venda v 
+                              INNER JOIN funcionario f ON f.cpf = v.cpf_funcionario_venda
+                              WHERE v.data_venda BETWEEN %(dinicio)s AND %(dfin)s 
+                              AND v.cpf_funcionario_venda = %(cpfFunc)s 
+                              GROUP BY f.nome, v.cpf_funcionario_venda''', conexao.conn, 
+                            params={"dinicio":pd.to_datetime(dataInicial, format='%Y-%m-%d'), 
+                                    "dfin":pd.to_datetime(dataFinal, format='%Y-%m-%d'), 
+                                    "cpfFunc":cpfFuncionario})        
+        data = data.rename({"nome":"Nome","total":"Total"}, axis='columns')
+        
+        print('')
+        print(tabulate(data, showindex=False, headers=data.columns, numalign="left"))
         conexao.close()            

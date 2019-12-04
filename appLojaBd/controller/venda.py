@@ -9,16 +9,16 @@ class Venda(object):
     '''
 
 
-    def __init__(self, cpfFuncionario, cpfCliente):
+    def __init__(self):
         '''
         Constructor
         '''
         self.idSaida = 0
-        self.cpfFuncionario = cpfFuncionario
-        self.cpfCliente = cpfCliente
         self.dataVenda = datetime.today().strftime('%Y-%m-%d')
         self.valorTotal = 0
         self.produtosVenda = []
+        self.cpfFuncionario = ""
+        self.cpfCliente = ""
         self.mCliente = modelCliente()
         self.mFuncionario = modelFuncionario()
         self.mVenda = modelVenda() 
@@ -33,21 +33,31 @@ class Venda(object):
             print("Este produto não existe na lista de produtos!")
             return False
         
-    def iniciaVenda(self):
-        ret = self.mFuncionario.verificaFuncionario(self.cpfFuncionario)
-        if ret == "":
+    def iniciaVenda(self, cpfFuncionario, cpfCliente):
+        ret = self.mFuncionario.verificaFuncionario(cpfFuncionario)
+        if ret == ():
             print("Funcionario não encontrado!")
             return False
-        ret = self.mCliente.VerificaCliente(self.cpfCliente)
-        if ret == "":
+        ret = self.mCliente.recuperaDados(cpfCliente)
+        if ret == ():
             print("Cliente não encontrado!")
             return False
     
     def fechaVenda(self):
+        self.calculaTotal()
         self.mVenda.insereVenda(self)
     
     def listaVendas(self):
         self.mVenda.retornaVendas()
+        
+    def listaVendaProdutos(self,idVenda):
+        self.mVenda.retornaVendaProdutos(idVenda)
+        
+    def calculaTotal(self):
+        total = 0
+        for produto in self.produtosVenda:
+            total = total + (produto.quantidade * produto.preco_venda)
+        self.valorTotal = total
           
     def relatoriosVendas(self, op, parametros):
         if op == 1:

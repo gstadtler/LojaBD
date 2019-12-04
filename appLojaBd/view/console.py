@@ -11,6 +11,9 @@ from controller.venda import Venda
 import getpass
 #from aifc import data
 
+def limparTerminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 def menuLogin():
     while not False:
         # descomentar após teste
@@ -69,8 +72,7 @@ def menuclientes():
         elif op == "2":
             edtIstDelCliente("I")
         elif op == "3":
-            time.sleep(2)
-            os.system('clear')
+            # limparTerminal()
             return False
             
 def edtIstDelFornecedor(op):
@@ -288,36 +290,92 @@ def menuCompras():
                 cnpj_forn = input("CNPJ do fornecedor: ")
                 compra.relatoriosCompras(2, inicio, fim, cnpj_forn)
             elif opRelatorio == "3":
-                return False
+                False
         elif op == "4":
             return False
         
 def IstVenda():
-    id_saida =""
-    cpfFuncionario = input("CPF do Funcionário: ")
     cpf_cliente = input("CPF do Cliente: ")
-    data_venda = datetime.today().strftime('%Y-%m-%d')
-    valor_total = input("Valor total da compra: ")
-    venda = Venda(id_saida, cpfFuncionario, cpf_cliente, data_venda, valor_total)
+    venda = Venda()
+    venda.cpfFuncionario = usuario.cpf
+    venda.cpfCliente = cpf_cliente
+    venda.iniciaVenda(usuario.cpf, cpf_cliente)
+    return venda
     
     
 def menuVendas():
     while not False:
-        print('''
-                 1 - Listar Vendas
-                 2 - Cadastrar Vendas
-                 3 - Relatórios 
-                 4 - Voltar ''')
+        print('''Menu de Vendas: 
+                1 - Listar Vendas 
+                2 - Cadastrar Vendas 
+                3 - Relatórios 
+                4 - Voltar ''')
         op = input("Opção: ")
         if op != "1" and op != "2" and op != "3" and op != "4":
             print("Opção inválida!")
-        elif op == "1":
+        elif op == "1" or op == "3":
             venda = Venda()
+            
+        if op == "1":
             venda.listaVendas()
+            print('''
+                     1 - Listar Produtos da Venda
+                     2 - Voltar''')
+            op = input("Opção: ")
+            if op != "1" and op != "2":
+                print("Opção inválida!")    
+            elif op == "1":
+                idVenda = input("ID da venda: ")
+                venda.listaVendaProdutos(idVenda)
+                print(''' 
+                        1 - Voltar ''')
+                op = input("Opção: ")
+                if op != "1":
+                    print("Opção inválida!")
+                else:
+                    False
+            elif op == "2":
+                False
         elif op == "2":
-            IstVenda()
+            venda = IstVenda()
+            prodLista = Produto()
+            prodLista.listaProdutos()
+            lacoVenda = True
+            while lacoVenda == True:
+                print('''
+                        1 - Adicionar Produto
+                        2 - Remover Produto
+                        3 - Fechar Venda
+                        4 - Cancelar Venda ''')
+                op = input("Opção: ")
+                if op == "1":
+                    lacoProd = True
+                    while lacoProd == True:
+                        idProd = input("ID do Produto: ")
+                        dadosProduto = prodLista.buscaProduto(idProd)
+                        produto = Produto(*dadosProduto)
+                        valida = True
+                        while valida == True:
+                            quantidade = int(input("Quantidade: "))
+                            produto.quantidade = quantidade
+                            if produto.validaQtdEstoqueVenda() == True: 
+                                venda.addProduto(produto)
+                                valida = False
+                        sair = input("Deseja inserir outro? (s/n) ")
+                        if sair == "s":
+                            lacoProd = True
+                        else:
+                            lacoProd = False
+                elif op =="2":
+                    pass
+                elif op == "3":
+                    venda.fechaVenda()
+                    lacoVenda = False
+                elif op == "4":
+                    del(venda)
+                    lacoVenda = False
+                    False
         elif op =="3":
-            venda = Venda()
             print('''
                     1 - Relatório de vendas por período
                     2 - Relatório de vendas por período e funcionário
@@ -326,22 +384,22 @@ def menuVendas():
             opRelatorio = input("Opção: ")
             if opRelatorio != "1" and opRelatorio != "2" and opRelatorio != "3" and opRelatorio != "4":
                 print("Opção inválida!")
-            elif opRelatorio == "1":
-                inicio = input("Data de início(ano-mes-dia): ")
-                fim = input("Data do término(ano-mes-dia): ")
-                venda.relatoriosVendas(1, inicio, fim)
+            
+            inicio = input("Data de início(ano-mes-dia): ")
+            fim = input("Data do término(ano-mes-dia): ")   
+            if opRelatorio == "1":
+                params = (inicio, fim)
+                venda.relatoriosVendas(1, params)
             elif opRelatorio == "2":
-                inicio = input("Data de início(ano-mes-dia): ")
-                fim = input("Data do término(ano-mes-dia): ")
-                cpf_func = input("CPF do funcionário: ")
-                venda.relatoriosVendas(2, inicio, fim, cpf_func)
+                cpfFunc = input("CPF do funcionário: ")
+                params = (inicio, fim, cpfFunc)
+                venda.relatoriosVendas(2, params)
             elif opRelatorio == "3":
-                inicio = input("Data de início(ano-mes-dia): ")
-                fim = input("Data do término(ano-mes-dia): ")
-                cpf_func = input("CPF do funcionário: ")
-                venda.relatoriosVendas(3, inicio, fim, cpf_func)
+                cpfFunc = input("CPF do funcionário: ")
+                params = (inicio, fim, cpfFunc)
+                venda.relatoriosVendas(3, params)
             elif opRelatorio == "4":
-                return False
+                False
         elif op == "4":
             return False
         
@@ -384,6 +442,7 @@ while not False:
     elif opcao == "6":
         menuVendas()
     elif opcao == "7":
-        usuario = False
+        usuario = None
+        break
     else:
         print("Opção inválida!")
