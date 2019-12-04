@@ -61,7 +61,10 @@ class Produto(object):
     def retornaProdutos(self):
         conexao = conex.Connection()
         print("")
-        data = pd.read_sql('SELECT * FROM produto', conexao.conn)
+        data = pd.read_sql('''SELECT id_produto, nome, CAST(preco_venda AS MONEY), 
+                                CAST(preco_compra AS MONEY), qtd_estoque 
+                              FROM produto 
+                              ORDER BY id_produto ASC''', conexao.conn)
         data = data.rename({"id_produto":"ID","nome":"Nome",
                             "preco_venda":"Preço Venda","preco_compra":"Preço Compra",
                             "qtd_estoque":"Quantidade"}, axis='columns')

@@ -56,7 +56,7 @@ class Venda(object):
     def calculaTotal(self):
         total = 0
         for produto in self.produtosVenda:
-            total = total + (produto.quantidade * produto.preco_venda)
+            total = total + (produto.quantidade * float(produto.preco_venda))
         self.valorTotal = total
           
     def relatoriosVendas(self, op, parametros):
