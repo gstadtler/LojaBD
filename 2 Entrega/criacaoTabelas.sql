@@ -42,7 +42,7 @@ CREATE TABLE gerente (
 CREATE TABLE vendedor (
     cpf           BIGINT,
     cpf_gerente   BIGINT,
-    meta          MONEY,
+    meta          NUMERIC,
     PRIMARY KEY ( cpf ),
     FOREIGN KEY ( cpf ) REFERENCES funcionario ( cpf ),
     FOREIGN KEY ( cpf_gerente ) REFERENCES gerente ( cpf )
@@ -76,8 +76,8 @@ CREATE TABLE telefone_fornecedor (
 CREATE TABLE produto (
     id_produto     SERIAL,
     nome           VARCHAR(20),
-    preco_venda    MONEY,
-    preco_compra   MONEY,
+    preco_venda    NUMERIC,
+    preco_compra   NUMERIC,
     qtd_estoque    INTEGER,
     PRIMARY KEY ( id_produto )
 );
@@ -86,7 +86,7 @@ CREATE TABLE compra_entrada (
     id_entrada        SERIAL,
     cnpj_fornecedor   BIGINT,
     data_compra       DATE,
-    valor_total       MONEY,
+    valor_total       NUMERIC,
     PRIMARY KEY ( id_entrada ),
     FOREIGN KEY ( cnpj_fornecedor ) REFERENCES fornecedor ( cnpj )
 );
@@ -123,7 +123,7 @@ CREATE TABLE venda (
     cpf_funcionario_venda   BIGINT,
     cpf_cliente_venda       BIGINT,
     data_venda              DATE,
-    valor_total             MONEY,
+    valor_total             NUMERIC,
     PRIMARY KEY ( id_saida ),
     FOREIGN KEY ( cpf_funcionario_venda ) REFERENCES funcionario ( cpf ),
     FOREIGN KEY ( cpf_cliente_venda ) REFERENCES cliente ( cpf )
