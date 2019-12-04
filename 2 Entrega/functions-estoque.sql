@@ -11,6 +11,8 @@ BEGIN
     UPDATE produto
     SET qtd_estoque = n - new.quantidade
     WHERE id_produto = old.id_produto_produto;
+    
+    RETURN true
 END;
 $$ LANGUAGE plpgsql;
 
@@ -27,5 +29,7 @@ BEGIN
     UPDATE produto
     SET qtd_estoque = n + new.quantidade
     WHERE id_produto = old.id_produto_produto;
+    
+    RETURN true
 END;
 $$ LANGUAGE plpgsql;
