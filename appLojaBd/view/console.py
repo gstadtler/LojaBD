@@ -22,6 +22,7 @@ def menuLogin():
     2 - Fechar Programa ''')
     op = input("Operação: ")
     if op != "1" and op != "2":
+        limparTerminal()
         print("Operação inválida!")
         return False
     elif op == "1":
