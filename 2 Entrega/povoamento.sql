@@ -404,8 +404,8 @@ INSERT INTO funcionario (
     70060134020,
     'Guilherme',
     'guilherme@funcionario.com',
-    '4321guilherme'
-    false
+    '4321guilherme',
+    'false'
 );
 
 INSERT INTO funcionario (
@@ -419,7 +419,7 @@ INSERT INTO funcionario (
     'Fernando',
     'fernando@funcionario.com',
     '4321fernando',
-    false
+    'false'
 );
 
 INSERT INTO funcionario (
@@ -433,7 +433,7 @@ INSERT INTO funcionario (
     'Gustavo',
     'gustavo@funcionario.com',
     '4321gustavo',
-    false
+    'false'
 );
 
 INSERT INTO funcionario (
@@ -447,7 +447,7 @@ INSERT INTO funcionario (
     'Regis',
     'regis@funcionario.com',
     '4321regis',
-    true
+    'true'
 );
 
 -- INSERINDO GERENTES
