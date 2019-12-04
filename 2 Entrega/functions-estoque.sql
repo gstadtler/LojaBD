@@ -12,7 +12,7 @@ BEGIN
     SET qtd_estoque = n - new.quantidade
     WHERE id_produto = old.id_produto_produto;
     
-    RETURN true;
+    RETURN new;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -30,6 +30,6 @@ BEGIN
     SET qtd_estoque = n + new.quantidade
     WHERE id_produto = old.id_produto_produto;
     
-    RETURN true;
+    RETURN new;
 END;
 $$ LANGUAGE plpgsql;
