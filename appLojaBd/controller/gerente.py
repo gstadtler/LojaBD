@@ -34,4 +34,4 @@ class Gerente(func.Funcionario):
         self.mGerente.retornaGerentes()
         
     def listaSupervisionados(self):
-        self.mGerente.verificaSupervisionados()
+        self.mGerente.verificaSupervisionados(self.cpf)

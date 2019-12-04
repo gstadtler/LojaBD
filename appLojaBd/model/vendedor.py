@@ -1,4 +1,8 @@
-from model import connection as conexao
+from model import connection as conex
+from tabulate import tabulate
+import pandas as pd
+pd.set_option('display.max_columns', 20)
+pd.set_option('display.width', 1000)
 
 class Vendedor(object):
     '''
@@ -12,21 +16,26 @@ class Vendedor(object):
         '''
     
     def verificaMeta(self, procValores):
-        conexao = conexao.Connection()
-        conexao.callProCedure(self, "verifica_meta_vendedor" , procValores)
+        conexao = conex.Connection()
+        conexao.callProCedure("verifica_meta_vendedor" , procValores)
         ret = conexao.cur.fetchone()
         conexao.close()
         return ret
     
     def verificaSupervisor(self, cpfVendedor):
-        conexao = conexao.Connection()
-        conexao.callProCedure(self, "verifica_supervisor" , cpfVendedor)
-        ret = conexao.cur.fetchone()
+        conexao = conex.Connection()
+        print('')
+        
+        data = pd.read_sql('''SELECT "verifica_supervisor"(%(cpfVendedor)s);''', conexao.conn, 
+                            params={"cpfVendedor":cpfVendedor})        
+        data = data.rename({"verifica_supervisor":"(CPF,Nome)"}, axis='columns')
+        
+        print('')
+        print(tabulate(data, showindex=False, headers=data.columns, numalign="left"))
         conexao.close()
-        return ret
     
     def retornaVendedores(self):
-        conexao = conexao.Connection()
+        conexao = conex.Connection()
         print('')
         conexao.query('SELECT * FROM vendedor')
         conexao.queryResult()

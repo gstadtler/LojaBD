@@ -7,8 +7,8 @@ class Vendedor(func.Funcionario):
     '''
 
 
-    def __init__(self, cpf, nome, email, senha, flagGerente, meta, cpfGerente):
-        super().__init__(cpf="", nome="", email="", senha="", flagGerente=False)
+    def __init__(self, cpf="", nome="", email="", senha="", flagGerente=False, meta=0, cpfGerente=""):
+        super().__init__(cpf, nome, email, senha, flagGerente=False)
         '''
         Constructor
         '''
@@ -50,10 +50,11 @@ class Vendedor(func.Funcionario):
     
     def verificaMeta(self,mes,ano):
         parametros = (self.cpf, mes, ano)
-        print(self.mVendedor.verificaMeta(parametros))
+        ret = self.mVendedor.verificaMeta(parametros)
+        print(ret[0])
         
     def verificaSupervisor(self):
-        print(self.mVendedor.verificaSupervisor(self.cpf))
+        self.mVendedor.verificaSupervisor(self.cpf)
         
     def listaVendedores(self):
         self.mVendedor.retornaVendedores()

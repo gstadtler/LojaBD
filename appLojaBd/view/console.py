@@ -9,6 +9,8 @@ from controller.produto import Produto
 from controller.compra import Compra
 from controller.venda import Venda
 import getpass
+from controller.vendedor import Vendedor
+from controller.gerente import Gerente
 #from aifc import data
 
 def limparTerminal():
@@ -19,8 +21,14 @@ def menuLogin():
         # descomentar após teste
         # email = input("Email: ")
         # senha = getpass.getpass(prompt='Senha: ', stream=None) 
-        email = "regis@funcionario.com"
-        senha = "4321regis"
+        
+        #gerente
+        #email = "regis@funcionario.com"
+        #senha = "4321regis"
+        
+        #vendedor
+        email = "gustavo@funcionario.com"
+        senha = "4321gustavo"
         usuario = setUsuario(email, senha)
         if usuario != False:
             return usuario
@@ -403,7 +411,45 @@ def menuVendas():
         elif op == "4":
             return False
         
-
+def menuSupervisionamento(tagGerente):
+    while not False:
+        if tagGerente == True:
+            print('''Menu Supervisionamento:
+                       1 - Listar Supervisionados
+                       2 - Voltar''')
+        else:
+            print('''Menu Supervisionamento:
+                       1 - Listar Supervisor
+                       2 - Verificar Meta
+                       3 - Voltar''')    
+        op = input("Opção: ")
+        if op != "1" and op != "2" and op!= "3":
+            print("Opção inválida!")
+            False
+        
+        elif op == "1":
+            if tagGerente == True:
+                ger = Gerente(usuario.cpf, usuario.nome, usuario.email)
+                ger.listaSupervisionados()
+            else:
+                vend = Vendedor(usuario.cpf, usuario.nome, usuario.email)
+                vend.verificaSupervisor()
+            print('''
+                     1 - Voltar''')
+            op = input("Opção: ")
+            if op != "1":
+                print("Opção inválida!")
+                False    
+            elif op == "1":
+                False
+        elif op == "2":
+            vend = Vendedor(usuario.cpf, usuario.nome, usuario.email)
+            mes = input("Mês: ")
+            ano = input("Ano: ")
+            vend.verificaMeta(mes, ano)
+        elif op == "3":
+            return False
+            
 print("Bem vindo ao Akatsuki Vendas.")
 print("Por favor, efetue o login.")
 usuario = menuLogin()
@@ -422,7 +468,8 @@ while not False:
              4 - Produtos 
              5 - Compras 
              6 - Vendas
-             7 - Sair ''')
+             7 - Supervisionamento
+             8 - Sair ''')
     opcao = input("Opção: ")
     
     if opcao == "1":
@@ -442,6 +489,11 @@ while not False:
     elif opcao == "6":
         menuVendas()
     elif opcao == "7":
+        if usuario.validaCargo() == True:
+            menuSupervisionamento(True)
+        else:
+            menuSupervisionamento(False)
+    elif opcao == "8":
         usuario = None
         break
     else:
