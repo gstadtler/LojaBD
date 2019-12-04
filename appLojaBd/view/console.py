@@ -286,21 +286,42 @@ def IstCompra():
     data_compra = datetime.today().strftime('%Y-%m-%d')
     valor_total = input("Valor total da compra: ")
     compra = Compra(cnpjFornecedor, id_entrada, data_compra, valor_total)
+    compra.idEntrada = compra.abreCompra()
+    prodLista = Produto()
+    prodLista.listaProdutos()
     while not False:
+        codProd = compra.idEntrada -1
         print('''
                  1 - Adiciona Produto
                  2 - Finalizar Compra
                  3 - Cancelar Compra ''')
         op = input("Opção: ")
         if op == "1":
-            nome = input("Nome: ")
-            preco_compra = input("Preço da Compra: ")
-            preco_venda = input("Preço para Venda: ")
-            qtd_estoque = input("Quantidade de Produtos: ")
-            prod = Produto(0, nome, preco_venda, preco_compra, qtd_estoque)
-            prod.operacaoProduto("I")
-            compra.addProduto(prod)
-            False
+            opLista = input("O produto está na lista? (s/n) ")
+            if opLista == "s":
+                idProd = input("ID do Produto: ")
+                dadosProduto = prodLista.buscaProduto(idProd)
+                produto = Produto(*dadosProduto)
+                quantidade = input("Quantidade de Produtos: ")
+                produto.quantidade = quantidade
+                compra.addProduto(produto)
+                False
+            elif opLista == "n":
+                nome = input("Nome: ")
+                preco_compra = input("Preço da Compra: ")
+                preco_venda = input("Preço para Venda: ")
+                qtd_estoque = input("Quantidade de Produtos: ")
+                prod = Produto(0, nome, preco_venda, preco_compra, qtd_estoque)
+                prod.quantidade = qtd_estoque
+                # recuperar o id do produto inserido para add na lista
+                codProd = codProd +1
+                prod.id = codProd
+                prod.operacaoProduto("I")
+                compra.addProduto(prod)
+                False
+            else:
+                False
+                
         elif op == "2":
             compra.fechaCompra()
             return False
@@ -317,13 +338,33 @@ def menuCompras():
         op = input("Opção: ")
         if op != "1" and op != "2" and op != "3" and op != "4":
             print("Opção inválida!")
+            False
         elif op == "1":
-            compra = Compra(653978695000180)
+            compra = Compra("")
             compra.listaCompras()
+            print('''
+                     1 - Listar Produtos da Compra
+                     2 - Voltar''')
+            op = input("Opção: ")
+            if op != "1" and op != "2":
+                print("Opção inválida!")
+                False  
+            elif op == "1":
+                idCompra = input("ID da compra: ")
+                compra.listaCompraProdutos(idCompra)
+                print(''' 
+                        1 - Voltar ''')
+                op = input("Opção: ")
+                if op != "1":
+                    print("Opção inválida!")
+                else:
+                    False
+            elif op == "2":
+                False  
         elif op == "2":
             IstCompra()
         elif op =="3":
-            compra = Compra(653978695000180)
+            compra = Compra("")
             print('''
                     1 - Relatório de compras por período
                     2 - Relatório de compras por período e fornecedor

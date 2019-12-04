@@ -22,7 +22,6 @@ class Compra(object):
     
     def addProduto(self, produto):
         self.produtosCompra.append(produto)
-        print(self.produtosCompra)
     
     def delProduto(self, numProduto):
         try:
@@ -36,8 +35,15 @@ class Compra(object):
             print("Fornecedor não encontrado!")
             return False
     
+    def abreCompra(self):
+        idCompra = self.mCompra.abreCompra(self)
+        return idCompra[0]
+        
     def fechaCompra(self):
-        self.mCompra.insereCompra(self)
+        self.mCompra.fechaCompra(self)
+        
+    def listaCompraProdutos(self, idCompra):
+        self.mCompra.retornaCompraProdutos(idCompra)
     
     def listaCompras(self):
         self.mCompra.retornaCompras()

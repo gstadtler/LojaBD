@@ -39,7 +39,7 @@ class Venda(object):
                 
     def retornaVendas(self):
         conexao = conex.Connection()
-        print('2')
+        print('')
         data = pd.read_sql('''SELECT id_saida, cpf_funcionario_venda, cpf_cliente_venda, 
                               data_venda, CAST(valor_total AS MONEY) FROM venda''', conexao.conn)        
         data = data.rename({"id_saida":"ID","cpf_funcionario_venda":"CPF Funcionario",

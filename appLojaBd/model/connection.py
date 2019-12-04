@@ -8,7 +8,7 @@ class Connection():
         self.conn.autocommit = False
         self.cur = self.conn.cursor()
 
-    def config(self, filename='/home/gabriel/Desktop/LojaBD/appLojaBd/database.ini', section='postgresql'):
+    def config(self, filename='/home/danilo/git/LojaBD/appLojaBd/database.ini', section='postgresql'):
         parser = ConfigParser()
         # ler o arquivo config
         parser.read(filename)
