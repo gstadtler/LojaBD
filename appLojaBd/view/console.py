@@ -28,16 +28,16 @@ def menuLogin():
     elif op == "1":
         while not False:
             # descomentar após teste
-            email = input("Email: ")
-            senha = getpass.getpass(prompt='Senha: ', stream=None) 
+            #email = input("Email: ")
+            #senha = getpass.getpass(prompt='Senha: ', stream=None) 
             
             #gerente
             #email = "regis@funcionario.com"
             #senha = "4321regis"
             
             #vendedor
-            #email = "gustavo@funcionario.com"
-            #senha = "4321gustavo"
+            email = "gustavo@funcionario.com"
+            senha = "4321gustavo"
             usuario = setUsuario(email, senha)
             if usuario != False:
                 return usuario
@@ -281,24 +281,31 @@ def menuProdutos():
             return False
                 
 def IstCompra():
-    id_entrada = ""
+    id_entrada = 0
     cnpjFornecedor = input("CNPJ do Fornecedor: ")
     data_compra = datetime.today().strftime('%Y-%m-%d')
     valor_total = input("Valor total da compra: ")
-    compra = Compra(id_entrada, cnpjFornecedor, data_compra, valor_total)
+    compra = Compra(cnpjFornecedor, id_entrada, data_compra, valor_total)
     while not False:
-        op = input('''1 - Adiciona Produto
-                      2 - Fechar Compra''')
-        nome = input("Nome: ")
-        preco_venda = input("Preço de Venda: ")
-        preco_compra = input("Preço de Compra: ")
-        qtd_estoque = input("Quantidade de Produtos: ")
-        prod = Produto("", nome, preco_venda, preco_compra, qtd_estoque)
-        if op == '1':
+        print('''
+                 1 - Adiciona Produto
+                 2 - Finalizar Compra
+                 3 - Cancelar Compra ''')
+        op = input("Opção: ")
+        if op == "1":
+            nome = input("Nome: ")
+            preco_compra = input("Preço da Compra: ")
+            preco_venda = input("Preço para Venda: ")
+            qtd_estoque = input("Quantidade de Produtos: ")
+            prod = Produto(0, nome, preco_venda, preco_compra, qtd_estoque)
+            prod.operacaoProduto("I")
             compra.addProduto(prod)
-        elif op == '2':
-            compra.fechaCompra()
             False
+        elif op == "2":
+            compra.fechaCompra()
+            return False
+        elif op == "3":
+            return False
             
 def menuCompras():
     while not False:
@@ -311,12 +318,12 @@ def menuCompras():
         if op != "1" and op != "2" and op != "3" and op != "4":
             print("Opção inválida!")
         elif op == "1":
-            compra = Compra()
+            compra = Compra(653978695000180)
             compra.listaCompras()
         elif op == "2":
             IstCompra()
         elif op =="3":
-            compra = Compra()
+            compra = Compra(653978695000180)
             print('''
                     1 - Relatório de compras por período
                     2 - Relatório de compras por período e fornecedor
@@ -327,12 +334,12 @@ def menuCompras():
             elif opRelatorio == "1":
                 inicio = input("Data de início(ano-mes-dia): ")
                 fim = input("Data do término(ano-mes-dia): ")
-                compra.relatoriosCompras(1, inicio, fim)
+                compra.relatoriosCompras(1, (inicio,fim))
             elif opRelatorio == "2":
                 inicio = input("Data de início(ano-mes-dia): ")
                 fim = input("Data do término(ano-mes-dia): ")
                 cnpj_forn = input("CNPJ do fornecedor: ")
-                compra.relatoriosCompras(2, inicio, fim, cnpj_forn)
+                compra.relatoriosCompras(2, (inicio,fim,cnpj_forn))
             elif opRelatorio == "3":
                 False
         elif op == "4":
@@ -482,10 +489,13 @@ def menuSupervisionamento(tagGerente, usuario):
             elif op == "1":
                 False
         elif op == "2":
-            vend = Vendedor(usuario.cpf, usuario.nome, usuario.email)
-            mes = input("Mês: ")
-            ano = input("Ano: ")
-            vend.verificaMeta(mes, ano)
+            if tagGerente == True:
+                return False
+            else:
+                vend = Vendedor(usuario.cpf, usuario.nome, usuario.email)
+                mes = input("Mês: ")
+                ano = input("Ano: ")
+                vend.verificaMeta(mes, ano)
         elif op == "3":
             return False
 def menuPrincipal(): 

@@ -8,20 +8,21 @@ class Compra(object):
     '''
 
 
-    def __init__(self, cnpjFornecedor):
+    def __init__(self, cnpjFornecedor, idEntrada=0, dataCompra=datetime.today().strftime('%Y-%m-%d'), valorTotal=0):
         '''
         Constructor
         '''
-        self.idEntrada = 0
+        self.idEntrada = idEntrada
         self.cnpjFornecedor = cnpjFornecedor
-        self.dataCompra = datetime.today().strftime('%Y-%m-%d')
-        self.valorTotal = 0
+        self.dataCompra = dataCompra
+        self.valorTotal = valorTotal
         self.produtosCompra = []
         self.mFornecedor = modelFornecedor()
         self.mCompra = modelCompra()
     
     def addProduto(self, produto):
         self.produtosCompra.append(produto)
+        print(self.produtosCompra)
     
     def delProduto(self, numProduto):
         try:

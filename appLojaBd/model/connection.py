@@ -8,7 +8,7 @@ class Connection():
         self.conn.autocommit = False
         self.cur = self.conn.cursor()
 
-    def config(self, filename='/home/danilo/git/LojaBD/appLojaBd/database.ini', section='postgresql'):
+    def config(self, filename='/home/gabriel/Desktop/LojaBD/appLojaBd/database.ini', section='postgresql'):
         parser = ConfigParser()
         # ler o arquivo config
         parser.read(filename)
@@ -40,8 +40,11 @@ class Connection():
     
     def queryResult(self):
         self.result = self.cur.fetchall()
-        for row in self.result:
-            print(row)
+        if self.result != '':
+            for row in self.result:
+                print(row)
+        else:
+            print("Não há registros dessa operação!")
             
     def callProCedure(self,procNome,procValores):
         self.cur.callproc(procNome, procValores)     

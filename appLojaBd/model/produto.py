@@ -29,6 +29,7 @@ class Produto(object):
         procValores = (operacao, codProd, produto.nome, 
                        produto.preco_venda, produto.preco_compra, produto.qtd_estoque)
         try:
+            conexao = conex.Connection()
             conexao.callProCedure("insere_atualiza_deleta_produto" , procValores)
             conexao.commit()
             print("Operação concluida!")
